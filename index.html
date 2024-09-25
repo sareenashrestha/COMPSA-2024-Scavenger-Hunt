@@ -86,14 +86,15 @@
         <div id="clueSection" class="hidden">
             <h2 id="clueMessage"></h2>
             <p>Upload a picture of yourself at the location:</p>
-            <input type="file" id="pictureUpload" accept="image/*">
-            <button onclick="submitPicture()">Submit Picture</button>
-            <p class="message" id="uploadMessage"></p>
+            <p>Please fill out the form to upload your picture:</p>
+            <a href="https://forms.gle/your-google-form-link" target="_blank">
+                <button>Go to Upload Form</button>
+            </a>
         </div>
 
         <!-- Next Clue Section -->
         <div id="nextClueSection" class="hidden">
-            <p>Picture successfully uploaded!</p>
+            <p>Now that you've uploaded your picture!</p>
             <button onclick="nextClue()">Next Clue</button>
         </div>
     </div>
@@ -143,24 +144,9 @@
                 document.getElementById("questionSection").classList.add('hidden');
                 document.getElementById("clueSection").classList.remove('hidden');
                 document.getElementById("clueMessage").innerText = "Correct! " + questions[currentQuestion].clue;
-                document.getElementById("uploadMessage").innerText = ""; // Clear any old upload messages
             } else {
                 messageEl.classList.remove('correct');
                 messageEl.innerHTML = "Incorrect, try again.";
-            }
-        }
-
-        function submitPicture() {
-            const uploadInput = document.getElementById("pictureUpload");
-            const uploadMessage = document.getElementById("uploadMessage");
-
-            if (uploadInput.files.length > 0) {
-                // Hide clue section and show next clue button
-                document.getElementById("clueSection").classList.add('hidden');
-                document.getElementById("nextClueSection").classList.remove('hidden');
-                uploadMessage.innerText = ""; // Clear the message
-            } else {
-                uploadMessage.innerText = "Please upload a picture first.";
             }
         }
 
