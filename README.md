@@ -12,7 +12,9 @@ Welcome to the COMPSA Scavenger Hunt! This interactive scavenger hunt is built u
 - Interactive scavenger hunt with multiple riddles and clues.
 - Image upload functionality where players must submit a picture before moving to the next question.
 - Hosted on GitHub Pages, so it's easily accessible via the web.
-- Designed with mobile-friendly layouts for easy participation on the go.## How to Play
+- Designed with mobile-friendly layouts for easy participation on the go.
+
+## How to Play
 
 1. **Start the Game**:
    Open the website in your browser (hosted on GitHub Pages). The game begins with the first riddle.
