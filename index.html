@@ -90,6 +90,9 @@
             <a href="https://docs.google.com/forms/d/e/1FAIpQLScgiteSIN9Smm3HQskx236-Hk5LJ6WljhB6QwHR6ZOF9ivoHA/viewform?usp=sf_link" target="_blank">
                 <button>Go to Upload Form</button>
             </a>
+            <!-- Next Clue Button -->
+            <p>After you submit the form, click below to proceed to the next riddle.</p>
+            <button onclick="nextClue()">Next Clue</button>
         </div>
 
         <!-- Next Clue Section -->
@@ -127,13 +130,12 @@
             {
                 question: "I’m the boy who lived, with a lightning scar, In a realm of magic, I’ve journeyed far. With loyal friends, I stand up and fight, Where would you find me, in a world full of light?",
                 answer: "douglas library",
-                clue: "Head to Douglas Library. Take a picture in the Harry Potter room. Make sure to be quiet; there are students studying in there.",
+                clue: "Head to Douglas Library. Take a picture in the Harry Potter room. Make sure to be quiet; there are students studying in there."
             },
             {
                 question: "The secret code is: FALL NIGHT OUT 2024 IS ON NOVEMBER 9TH. Enter this in the answer box.",
                 answer: "fall night out 2024 is on november 9th",
-                clue: "You're done! Fill out this Google Form to COMPLETE THE SCAVENGER HUNT!!",
-                // image: "https://upload.wikimedia.org/wikipedia/commons/6/63/Douglas_Library_Queen%27s_University.jpg"
+                clue: "You're done! Fill out this Google Form to COMPLETE THE SCAVENGER HUNT!!"
             }
         ];
 
@@ -141,7 +143,7 @@
             const userAnswer = document.getElementById("answerInput").value.toLowerCase();
             const messageEl = document.getElementById("message");
 
-            if (userAnswer === questions[currentQuestion].answer.toLowerCase()) {
+            if (userAnswer === questions[currentQuestion].answer) {
                 document.getElementById("questionSection").classList.add('hidden');
                 document.getElementById("clueSection").classList.remove('hidden');
                 document.getElementById("clueMessage").innerText = "Correct! " + questions[currentQuestion].clue;
@@ -160,9 +162,11 @@
                 document.getElementById("message").innerText = "";
 
                 document.getElementById("questionSection").classList.remove('hidden');
-                document.getElementById("nextClueSection").classList.add('hidden');
+                document.getElementById("clueSection").classList.add('hidden');
             } else {
                 document.getElementById("nextClueSection").innerHTML = `<p>Congratulations! You've finished. Screenshot this page and <a href="https://forms.gle/your-google-form-link" target="_blank">click here to submit</a>.</p>`;
+                document.getElementById("clueSection").classList.add('hidden');
+                document.getElementById("nextClueSection").classList.remove('hidden');
             }
         }
     </script>
