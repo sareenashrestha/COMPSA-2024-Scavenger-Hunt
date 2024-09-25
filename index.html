@@ -85,13 +85,14 @@
         <!-- Clue and Upload Section -->
         <div id="clueSection" class="hidden">
             <h2 id="clueMessage"></h2>
-            <p>Upload a picture of yourself at the location. If you took a picture at an incorrect location, a COMPSA member will message you on your private group chat and let you know. If so, please upload a picture at the correct location and send it on Discord.</p>
+            <p>Upload a picture of yourself at the location. If you took a picture at an incorrect location, a COMPSA member will message you on your private group chat and let you know.</p>
             <p>Please fill out the form to upload your picture:</p>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScgiteSIN9Smm3HQskx236-Hk5LJ6WljhB6QwHR6ZOF9ivoHA/viewform?usp=sf_link" target="_blank">
+            <!-- Each question has its own unique Google Form -->
+            <a id="googleFormLink" href="#" target="_blank">
                 <button>Go to Upload Form</button>
             </a>
-            <!-- Next Clue Button -->
             <p>After you submit the form, click below to proceed to the next riddle.</p>
+            <!-- Next Clue Button -->
             <button onclick="nextClue()">Next Clue</button>
         </div>
 
@@ -110,32 +111,37 @@
                 question: "Identify the piece of hardware in the image above",
                 answer: "cpu",
                 clue: "Go to ARC and take a picture",
-                image: "https://upload.wikimedia.org/wikipedia/commons/6/6f/DDR4_RAM.jpg"
+                image: "https://upload.wikimedia.org/wikipedia/commons/6/6f/DDR4_RAM.jpg",
+                formLink: "https://forms.gle/SB2wSEudQ9P43QMQ8" // Google Form Link for this clue
             },
             {
                 question: "In the heart of the dorms, where students reside, I serve up warm dishes with Mexican pride. Though my name suggests rest, don't be misled, For I feed hungry minds when it's time to be fed. What am I?",
                 answer: "the lazy scholar",
-                clue: "Head to Victoria Hall. Take a picture in front of the Mexican Food station at the Lazy Scholar."
+                clue: "Head to Victoria Hall. Take a picture in front of the Mexican Food station at the Lazy Scholar.",
+                formLink: "https://forms.gle/SB2wSEudQ9P43QMQ8" // Google Form Link for this clue
             },
             {
                 question: "Convert this 8-bit binary to ASCII code: 1000011 01001111 01001101 01010000 01010011 01000001 01010010 01001111 01000011 01001011 01010011",
                 answer: "compsarocks",
-                clue: "Go to Mitchell Hall."
-            },
+                clue: "Go to Mitchell Hall.",
+                formLink: "https://forms.gle/SB2wSEudQ9P43QMQ8" // Google Form Link for this clue
             {
                 question: "I’m a sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they’re in the wrong order. What am I?",
                 answer: "bubble sort",
-                clue: "Head to Stauffer Library. Take a picture in the Fireplace Reading Room on the second floor."
+                clue: "Head to Stauffer Library. Take a picture in the Fireplace Reading Room on the second floor.",
+                 formLink: "https://forms.gle/SB2wSEudQ9P43QMQ8" // Google Form Link for this clue
             },
             {
                 question: "I’m the boy who lived, with a lightning scar, In a realm of magic, I’ve journeyed far. With loyal friends, I stand up and fight, Where would you find me, in a world full of light?",
                 answer: "douglas library",
-                clue: "Head to Douglas Library. Take a picture in the Harry Potter room. Make sure to be quiet; there are students studying in there."
+                clue: "Head to Douglas Library. Take a picture in the Harry Potter room. Make sure to be quiet; there are students studying in there.",
+                 formLink: "https://forms.gle/SB2wSEudQ9P43QMQ8" // Google Form Link for this clue
             },
             {
                 question: "The secret code is: FALL NIGHT OUT 2024 IS ON NOVEMBER 9TH. Enter this in the answer box.",
                 answer: "fall night out 2024 is on november 9th",
-                clue: "You're done! Fill out this Google Form to COMPLETE THE SCAVENGER HUNT!!"
+                clue: "You're done! Fill out this Google Form to COMPLETE THE SCAVENGER HUNT!!",
+                 formLink: "https://forms.gle/SB2wSEudQ9P43QMQ8" // Google Form Link for this clue
             }
         ];
 
@@ -143,10 +149,11 @@
             const userAnswer = document.getElementById("answerInput").value.toLowerCase();
             const messageEl = document.getElementById("message");
 
-            if (userAnswer === questions[currentQuestion].answer) {
+            if (userAnswer === questions[currentQuestion].answer.toLowerCase()) {
                 document.getElementById("questionSection").classList.add('hidden');
                 document.getElementById("clueSection").classList.remove('hidden');
                 document.getElementById("clueMessage").innerText = "Correct! " + questions[currentQuestion].clue;
+                document.getElementById("googleFormLink").href = questions[currentQuestion].formLink;
             } else {
                 messageEl.classList.remove('correct');
                 messageEl.innerHTML = "Incorrect, try again.";
@@ -164,7 +171,7 @@
                 document.getElementById("questionSection").classList.remove('hidden');
                 document.getElementById("clueSection").classList.add('hidden');
             } else {
-                document.getElementById("nextClueSection").innerHTML = `<p>Congratulations! You've finished. Screenshot this page and <a href="https://forms.gle/your-google-form-link" target="_blank">click here to submit</a>.</p>`;
+                document.getElementById("nextClueSection").innerHTML = `<p>Congratulations! You've finished. Screenshot this page and <a href="${questions[currentQuestion].formLink}" target="_blank">click here to submit</a>.</p>`;
                 document.getElementById("clueSection").classList.add('hidden');
                 document.getElementById("nextClueSection").classList.remove('hidden');
             }
