@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMPSA Scavenger Hunt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2a2a2a;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 28px;
+            color: #b19cd9; /* light purple */
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 4px;
+        }
+        input {
+            background-color: #444;
+            color: #fff;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .message {
+            margin-top: 10px;
+            color: red;
+        }
+        .correct {
+            color: green;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Question Section -->
+        <div id="questionSection">
+            <h1>COMPSA Scavenger Hunt</h1>
+            <h2 id="question">Question 1: Identify this hardware part</h2>
+            <img id="questionImage" src="https://upload.wikimedia.org/wikipedia/commons/6/6f/DDR4_RAM.jpg" alt="Question Image">
+            <input type="text" id="answerInput" placeholder="Enter your answer">
+            <button onclick="checkAnswer()">Submit</button>
+            <p class="message" id="message"></p>
+        </div>
+
+        <!-- Clue and Upload Section -->
+        <div id="clueSection" class="hidden">
+            <h2 id="clueMessage"></h2>
+            <p>Upload a picture of yourself at the location:</p>
+            <input type="file" id="pictureUpload" accept="image/*">
+            <button onclick="submitPicture()">Submit Picture</button>
+            <p class="message" id="uploadMessage"></p>
+        </div>
+
+        <!-- Next Clue Section -->
+        <div id="nextClueSection" class="hidden">
+            <p>Picture successfully uploaded!</p>
+            <button onclick="nextClue()">Next Clue</button>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion = 0;
+
+        const questions = [
+            {
+                question: "Identify this hardware part",
+                answer: "cpu",
+                clue: "Go to ARC and take a picture",
+                image: "https://upload.wikimedia.org/wikipedia/commons/6/6f/DDR4_RAM.jpg"
+            },
+            {
+                question: "In the heart of the dorms, where students reside, I serve up warm dishes with Mexican pride. Though my name suggests rest, don't be misled, For I feed hungry minds when it's time to be fed. What am I?",
+                answer: "the lazy scholar",
+                clue: "Head to Victoria Hall",
+                image: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Lazy_scholar.jpg"
+            },
+            {
+                question: "Convert this 8-bit binary to ASCII code: 1000011 01001111 01001101 01010000 01010011 01000001 01010010 01001111 01000011 01001011 01010011",
+                answer: "compsarocks",
+                clue: "Go to Mitchell Hall",
+                image: "https://upload.wikimedia.org/wikipedia/commons/3/3d/Binary_Code.png"
+            },
+            {
+                question: "I’m a sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they’re in the wrong order. What am I?",
+                answer: "bubble sort",
+                clue: "Head to Stauffer Library",
+                image: "https://upload.wikimedia.org/wikipedia/commons/1/16/Bubble-sort-example-300px.gif"
+            },
+            {
+                question: "I’m the boy who lived, with a lightning scar, In a realm of magic, I’ve journeyed far. With loyal friends, I stand up and fight, Where would you find me, in a world full of light?",
+                answer: "douglas library",
+                clue: "You're done! Submit your proof!",
+                image: "https://upload.wikimedia.org/wikipedia/commons/6/63/Douglas_Library_Queen%27s_University.jpg"
+            }
+        ];
+
+        function checkAnswer() {
+            const userAnswer = document.getElementById("answerInput").value.toLowerCase();
+            const messageEl = document.getElementById("message");
+
+            if (userAnswer === questions[currentQuestion].answer) {
+                // Hide question section and show clue section
+                document.getElementById("questionSection").classList.add('hidden');
+                document.getElementById("clueSection").classList.remove('hidden');
+                document.getElementById("clueMessage").innerText = "Correct! " + questions[currentQuestion].clue;
+                document.getElementById("uploadMessage").innerText = ""; // Clear any old upload messages
+            } else {
+                messageEl.classList.remove('correct');
+                messageEl.innerHTML = "Incorrect, try again.";
+            }
+        }
+
+        function submitPicture() {
+            const uploadInput = document.getElementById("pictureUpload");
+            const uploadMessage = document.getElementById("uploadMessage");
+
+            if (uploadInput.files.length > 0) {
+                // Hide clue section and show next clue button
+                document.getElementById("clueSection").classList.add('hidden');
+                document.getElementById("nextClueSection").classList.remove('hidden');
+                uploadMessage.innerText = ""; // Clear the message
+            } else {
+                uploadMessage.innerText = "Please upload a picture first.";
+            }
+        }
+
+        function nextClue() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                // Update the question and image
+                document.getElementById("question").innerHTML = "Question " + (currentQuestion + 1) + ": " + questions[currentQuestion].question;
+                document.getElementById("questionImage").src = questions[currentQuestion].image;
+                // Reset input and message
+                document.getElementById("answerInput").value = "";
+                document.getElementById("message").innerText = "";
+
+                // Show question section and hide next clue section
+                document.getElementById("questionSection").classList.remove('hidden');
+                document.getElementById("nextClueSection").classList.add('hidden');
+            } else {
+                // If no more clues, show the final message
+                document.getElementById("nextClueSection").innerHTML = `<p>Congratulations! You've finished. Screenshot this page and <a href="https://forms.gle/your-google-form-link" target="_blank">click here to submit</a>.</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
