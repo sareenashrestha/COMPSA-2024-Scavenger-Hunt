@@ -28,7 +28,7 @@
         }
         h1 {
             font-size: 28px;
-            color: #b19cd9; /* light purple */
+            color: #b19cd9;
             margin-bottom: 20px;
         }
         img {
@@ -141,8 +141,7 @@
             const userAnswer = document.getElementById("answerInput").value.toLowerCase();
             const messageEl = document.getElementById("message");
 
-            if (userAnswer === questions[currentQuestion].answer) {
-                // Hide question section and show clue section
+            if (userAnswer === questions[currentQuestion].answer.toLowerCase()) {
                 document.getElementById("questionSection").classList.add('hidden');
                 document.getElementById("clueSection").classList.remove('hidden');
                 document.getElementById("clueMessage").innerText = "Correct! " + questions[currentQuestion].clue;
@@ -155,22 +154,17 @@
         function nextClue() {
             if (currentQuestion < questions.length - 1) {
                 currentQuestion++;
-                // Update the question and image
                 document.getElementById("question").innerHTML = "Question " + (currentQuestion + 1) + ": " + questions[currentQuestion].question;
                 document.getElementById("questionImage").src = questions[currentQuestion].image;
-                // Reset input and message
                 document.getElementById("answerInput").value = "";
                 document.getElementById("message").innerText = "";
 
-                // Show question section and hide next clue section
                 document.getElementById("questionSection").classList.remove('hidden');
                 document.getElementById("nextClueSection").classList.add('hidden');
             } else {
-                // If no more clues, show the final message
                 document.getElementById("nextClueSection").innerHTML = `<p>Congratulations! You've finished. Screenshot this page and <a href="https://forms.gle/your-google-form-link" target="_blank">click here to submit</a>.</p>`;
             }
         }
     </script>
 </body>
 </html>
-
