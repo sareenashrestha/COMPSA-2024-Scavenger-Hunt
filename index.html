@@ -75,7 +75,7 @@
         <!-- Question Section -->
         <div id="questionSection">
             <h1>COMPSA Scavenger Hunt</h1>
-            <h2 id="question">Question 1: Identify this hardware part</h2>
+            <h2 id="question">Question 1: Identify the piece of hardware in the image above</h2>
             <img id="questionImage" src="cpu-4699260_1280.jpg" alt="Question Image">
             <input type="text" id="answerInput" placeholder="Enter your answer">
             <button onclick="checkAnswer()">Submit</button>
@@ -85,9 +85,9 @@
         <!-- Clue and Upload Section -->
         <div id="clueSection" class="hidden">
             <h2 id="clueMessage"></h2>
-            <p>Upload a picture of yourself at the location:</p>
+            <p>Upload a picture of yourself at the location. If you took a picture at an incorrect location, a COMPSA member will message you on your private group chat and let you know. If so, please upload a picture at the correct location and send it on discord.</p>
             <p>Please fill out the form to upload your picture:</p>
-            <a href="https://forms.gle/your-google-form-link" target="_blank">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScgiteSIN9Smm3HQskx236-Hk5LJ6WljhB6QwHR6ZOF9ivoHA/viewform?usp=sf_link" target="_blank">
                 <button>Go to Upload Form</button>
             </a>
         </div>
@@ -104,7 +104,7 @@
 
         const questions = [
             {
-                question: "Identify this hardware part",
+                question: "Identify the piece of hardware in the image above",
                 answer: "cpu",
                 clue: "Go to ARC and take a picture",
                 image: "https://upload.wikimedia.org/wikipedia/commons/6/6f/DDR4_RAM.jpg"
@@ -112,7 +112,7 @@
             {
                 question: "In the heart of the dorms, where students reside, I serve up warm dishes with Mexican pride. Though my name suggests rest, don't be misled, For I feed hungry minds when it's time to be fed. What am I?",
                 answer: "the lazy scholar",
-                clue: "Head to Victoria Hall",
+                clue: "Head to Victoria Hall. Take a picture in front of the Mexican Food station at the Lazy Scholar",
                 image: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Lazy_scholar.jpg"
             },
             {
@@ -124,13 +124,19 @@
             {
                 question: "I’m a sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they’re in the wrong order. What am I?",
                 answer: "bubble sort",
-                clue: "Head to Stauffer Library",
+                clue: "Head to Stauffer Library. Take a picture in the Fireplace Reading Room on the second floor.",
                 image: "https://upload.wikimedia.org/wikipedia/commons/1/16/Bubble-sort-example-300px.gif"
             },
             {
                 question: "I’m the boy who lived, with a lightning scar, In a realm of magic, I’ve journeyed far. With loyal friends, I stand up and fight, Where would you find me, in a world full of light?",
                 answer: "douglas library",
-                clue: "You're done! Submit your proof!",
+                clue: "Head to Douglas Library. Take a picture in the Harry Potter room. Make sure to be quiet, there are students studying in there!,
+                image: "https://upload.wikimedia.org/wikipedia/commons/6/63/Douglas_Library_Queen%27s_University.jpg"
+            },
+            {
+                question: "The secret code is: FALL NIGHT OUT 2024 IS ON NOVEMBER 9TH. Enter this in the answer box.",
+                answer: "douglas library",
+                clue: "You're done! Fill out this google form to COMPLETE THE SCAVENGER HUNT!!",
                 image: "https://upload.wikimedia.org/wikipedia/commons/6/63/Douglas_Library_Queen%27s_University.jpg"
             }
         ];
