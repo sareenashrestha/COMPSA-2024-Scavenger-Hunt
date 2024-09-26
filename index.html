@@ -142,11 +142,6 @@
                 answer: "douglas library",
                 clue: "Head to Douglas Library. Take a picture in the Harry Potter room. Make sure to be quiet; there are students studying in there.",
                 image: "https://upload.wikimedia.org/wikipedia/commons/6/63/Douglas_Library_Queen%27s_University.jpg"
-            },
-            {
-                question: "The secret code is: FALL NIGHT OUT 2024 IS ON NOVEMBER 9TH. Enter this in the answer box.",
-                answer: "fall night out 2024 is on november 9th",
-                image: "https://upload.wikimedia.org/wikipedia/commons/c/cb/Calendar-November-2024.jpg"
             }
         ];
 
@@ -158,7 +153,7 @@
                 if (currentQuestion === questions.length - 1) {
                     // Handle last question differently
                     messageEl.classList.add('correct');
-                    messageEl.innerHTML = `Congratulations! You've finished. Screenshot this page and remember the secret code: <strong>${questions[currentQuestion].answer}</strong>`;
+                    messageEl.innerHTML = `Congratulations! You've finished. Screenshot this page and remember the secret code: FALL NIGHT OUT IS SATURDAY, NOVEMBER 9TH`;
                 } else {
                     document.getElementById("questionSection").classList.add('hidden');
                     document.getElementById("clueSection").classList.remove('hidden');
