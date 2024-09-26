@@ -111,42 +111,42 @@
                 question: "Identify the piece of hardware in the image above",
                 answer: "cpu",
                 clue: "Go to ARC and take a picture",
-                image: "https://upload.wikimedia.org/wikipedia/commons/6/6f/DDR4_RAM.jpg",
-                formLink: "https://forms.gle/SB2wSEudQ9P43QMQ8" // Google Form Link for this clue
+                image: "https://upload.wikimedia.org/wikipedia/commons/6/6f/DDR4_RAM.jpg"
             },
             {
                 question: "Convert this 8-bit binary to ASCII code: 1000011 01001111 01001101 01010000 01010011 01000001 01010010 01001111 01000011 01001011 01010011",
                 answer: "compsarocks",
                 clue: "Go to Mitchell Hall.",
-                formLink: "https://forms.gle/SB2wSEudQ9P43QMQ8" // Google Form Link for this clue
+                image: "https://upload.wikimedia.org/wikipedia/commons/3/3d/Binary_Code.png"
             },
             {
                 question: "In the heart of the dorms, where students reside, I serve up warm dishes with Mexican pride. Though my name suggests rest, don't be misled, For I feed hungry minds when it's time to be fed. What am I?",
                 answer: "the lazy scholar",
                 clue: "Head to Victoria Hall. Take a picture in front of the Mexican Food station at the Lazy Scholar.",
-                formLink: "https://forms.gle/SB2wSEudQ9P43QMQ8" // Google Form Link for this clue
+                image: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Lazy_scholar.jpg"
             },
             {
                 question: "Convert the emojis to a word",
                 answer: "madagascar",
                 clue: "Head to Goodes Hall. Take a picture in the Cafe Union",
-                formLink: "https://forms.gle/SB2wSEudQ9P43QMQ8" // Google Form Link for this clue
-            }, // Missing closing brace here
+                image: "https://upload.wikimedia.org/wikipedia/commons/7/70/Madagascar_Location_Map.png"
+            },
             {
                 question: "I’m a sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they’re in the wrong order. What am I?",
                 answer: "bubble sort",
                 clue: "Head to Stauffer Library. Take a picture in the Fireplace Reading Room on the second floor.",
-                formLink: "https://forms.gle/SB2wSEudQ9P43QMQ8" // Google Form Link for this clue
+                image: "https://upload.wikimedia.org/wikipedia/commons/1/16/Bubble-sort-example-300px.gif"
             },
             {
                 question: "I’m the boy who lived, with a lightning scar, In a realm of magic, I’ve journeyed far. With loyal friends, I stand up and fight, Where would you find me, in a world full of light?",
                 answer: "douglas library",
                 clue: "Head to Douglas Library. Take a picture in the Harry Potter room. Make sure to be quiet; there are students studying in there.",
-                formLink: "https://forms.gle/SB2wSEudQ9P43QMQ8" // Google Form Link for this clue
+                image: "https://upload.wikimedia.org/wikipedia/commons/6/63/Douglas_Library_Queen%27s_University.jpg"
             },
             {
-                question: "The secret code is: FALL NIGHT OUT 2024 IS ON NOVEMBER 9TH. Enter this in the answer box. Be sure to remember this answer, as you will need it for the next page.",
+                question: "The secret code is: FALL NIGHT OUT 2024 IS ON NOVEMBER 9TH. Enter this in the answer box.",
                 answer: "fall night out 2024 is on november 9th",
+                image: "https://upload.wikimedia.org/wikipedia/commons/c/cb/Calendar-November-2024.jpg"
             }
         ];
 
@@ -155,10 +155,15 @@
             const messageEl = document.getElementById("message");
 
             if (userAnswer === questions[currentQuestion].answer.toLowerCase()) {
-                document.getElementById("questionSection").classList.add('hidden');
-                document.getElementById("clueSection").classList.remove('hidden');
-                document.getElementById("clueMessage").innerText = "Correct! " + questions[currentQuestion].clue;
-                document.getElementById("googleFormLink").href = questions[currentQuestion].formLink;
+                if (currentQuestion === questions.length - 1) {
+                    // Handle last question differently
+                    messageEl.classList.add('correct');
+                    messageEl.innerHTML = `Congratulations! You've finished. Screenshot this page and remember the secret code: <strong>${questions[currentQuestion].answer}</strong>`;
+                } else {
+                    document.getElementById("questionSection").classList.add('hidden');
+                    document.getElementById("clueSection").classList.remove('hidden');
+                    document.getElementById("clueMessage").innerText = "Correct! " + questions[currentQuestion].clue;
+                }
             } else {
                 messageEl.classList.remove('correct');
                 messageEl.innerHTML = "Incorrect, try again.";
@@ -175,10 +180,6 @@
 
                 document.getElementById("questionSection").classList.remove('hidden');
                 document.getElementById("clueSection").classList.add('hidden');
-            } else {
-                document.getElementById("nextClueSection").innerHTML = `<p>Congratulations! You've finished. Screenshot this page and <a href="${questions[currentQuestion].formLink}" target="_blank">click here to submit</a>.</p>`;
-                document.getElementById("clueSection").classList.add('hidden');
-                document.getElementById("nextClueSection").classList.remove('hidden');
             }
         }
     </script>
