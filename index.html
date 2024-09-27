@@ -99,7 +99,7 @@
             <button onclick="nextClue()">Next Clue</button>
         </div>
 
-        <!-- LeetCode Section (added at the end) -->
+        <!-- LeetCode Section (second last) -->
         <div id="leetCodeSection" class="hidden">
             <h2>Fill in the code:</h2>
             <pre>
@@ -114,7 +114,7 @@ def sum_of_squares_of_positives(numbers):
             <p class="message" id="leetMessage"></p>
         </div>
 
-        <!-- Word Jeopardy Section (added at the end) -->
+        <!-- Word Jeopardy Section (last question) -->
         <div id="wordJeopardySection" class="hidden">
             <h2>Word Jeopardy</h2>
             <p>Fill in the missing letters:</p>
@@ -192,7 +192,7 @@ def sum_of_squares_of_positives(numbers):
         }
 
         function nextClue() {
-            if (currentQuestion < questions.length - 1) {
+            if (currentQuestion < questions.length - 2) {
                 currentQuestion++;
                 document.getElementById("question").innerHTML = "Question " + (currentQuestion + 1) + ": " + questions[currentQuestion].question;
                 document.getElementById("questionImage").src = questions[currentQuestion].image;
@@ -201,9 +201,12 @@ def sum_of_squares_of_positives(numbers):
 
                 document.getElementById("questionSection").classList.remove('hidden');
                 document.getElementById("clueSection").classList.add('hidden');
-            } else {
+            } else if (currentQuestion === questions.length - 2) {
                 document.getElementById("clueSection").classList.add('hidden');
                 document.getElementById("leetCodeSection").classList.remove('hidden'); // Show LeetCode section next
+            } else {
+                document.getElementById("leetCodeSection").classList.add('hidden');
+                document.getElementById("wordJeopardySection").classList.remove('hidden'); // Show Word Jeopardy section
             }
         }
 
@@ -222,7 +225,7 @@ def sum_of_squares_of_positives(numbers):
             const userAnswers = [input1, input2, input3, input4, input5, input6, input7, input8];
 
             if (JSON.stringify(correctAnswers) === JSON.stringify(userAnswers)) {
-                document.getElementById("leetMessage").innerHTML = "Correct! Now proceed to the next clue.";
+                document.getElementById("leetMessage").innerHTML = "Correct! Now proceed to the final question.";
                 document.getElementById("leetMessage").style.color = "green";
                 document.getElementById("leetCodeSection").classList.add('hidden');
                 document.getElementById("wordJeopardySection").classList.remove('hidden');
