@@ -70,35 +70,30 @@
 </head>
 <body>
     <div class="container">
-        <h1>COMPSA Scavenger Hunt</h1>
-
-        <!-- LeetCode Section -->
-        <div id="leetCodeSection">
-            <h2>Fill in the code:</h2>
-            <pre>
-def sum_of_squares_of_positives(numbers):
-    total = <input type="text" id="input1" size="5" placeholder="______">
-    for num in <input type="text" id="input2" size="5" placeholder="______">:
-        if <input type="text" id="input3" size="5" placeholder="______"> > <input type="text" id="input4" size="5" placeholder="______">:
-            total += <input type="text" id="input5" size="5" placeholder="______"> <input type="text" id="input6" size="5" placeholder="______"> <input type="text" id="input7" size="5" placeholder="______">
-    return <input type="text" id="input8" size="5" placeholder="______">
-            </pre>
-            <button onclick="checkLeetCode()">Submit Code</button>
-            <p class="message" id="leetMessage"></p>
+        <!-- Image at the top -->
+        <img src="images-7.png" alt="Scavenger Hunt Logo" id="topImage">
+        <!-- Question Section -->
+        <div id="questionSection">
+            <h1>COMPSA Scavenger Hunt</h1>
+            <h2 id="question">Question 1: Identify the piece of hardware in the image above</h2>
+            <img id="questionImage" src="cpu-4699260_1280.jpg" alt="Question Image">
+            <input type="text" id="answerInput" placeholder="Enter your answer">
+            <button onclick="checkAnswer()">Submit</button>
+            <p class="message" id="message"></p>
         </div>
 
-        <!-- Word Jeopardy Section -->
-        <div id="wordJeopardySection" class="hidden">
-            <h2>Word Jeopardy</h2>
-            <p>Fill in the missing letters:</p>
-            <p>1) _ y _ h _ n</p>
-            <input type="text" id="word1" size="15" placeholder="Python">
-            <p>2) A _ r _ _</p>
-            <input type="text" id="word2" size="15" placeholder="Array">
-            <p>3) _ r _ g _ a _</p>
-            <input type="text" id="word3" size="15" placeholder="Program">
-            <button onclick="checkWordJeopardy()">Submit Answers</button>
-            <p class="message" id="wordMessage"></p>
+        <!-- Clue and Upload Section -->
+        <div id="clueSection" class="hidden">
+            <h2 id="clueMessage"></h2>
+            <p>Upload a picture of yourself at the location. If you took a picture at an incorrect location, a COMPSA member will message you on your private group chat and let you know.</p>
+            <p>Please fill out the form to upload your picture:</p>
+            <!-- Each question has its own unique Google Form -->
+            <a id="googleFormLink" href="#" target="_blank">
+                <button>Go to Upload Form</button>
+            </a>
+            <p>After you submit the form, click below to proceed to the next riddle.</p>
+            <!-- Next Clue Button -->
+            <button onclick="nextClue()">Next Clue</button>
         </div>
 
         <!-- Next Clue Section -->
@@ -109,43 +104,83 @@ def sum_of_squares_of_positives(numbers):
     </div>
 
     <script>
-        // LeetCode question check
-        function checkLeetCode() {
-            const input1 = document.getElementById("input1").value.toLowerCase();
-            const input2 = document.getElementById("input2").value.toLowerCase();
-            const input3 = document.getElementById("input3").value.toLowerCase();
-            const input4 = document.getElementById("input4").value.toLowerCase();
-            const input5 = document.getElementById("input5").value.toLowerCase();
-            const input6 = document.getElementById("input6").value.toLowerCase();
-            const input7 = document.getElementById("input7").value.toLowerCase();
-            const input8 = document.getElementById("input8").value.toLowerCase();
+        let currentQuestion = 0;
 
-            const correctAnswers = ["0", "numbers", "num", "0", "num", "**", "2", "total"];
-            const userAnswers = [input1, input2, input3, input4, input5, input6, input7, input8];
+        const questions = [
+            {
+                question: "Identify the piece of hardware in the image above",
+                answer: "cpu",
+                clue: "Go to ARC and take a picture",
+                image: "https://upload.wikimedia.org/wikipedia/commons/6/6f/DDR4_RAM.jpg"
+            },
+            {
+                question: "Convert this 8-bit binary to ASCII code: 1000011 01001111 01001101 01010000 01010011 01000001 01010010 01001111 01000011 01001011 01010011",
+                answer: "compsarocks",
+                clue: "Go to Mitchell Hall.",
+                image: "https://upload.wikimedia.org/wikipedia/commons/3/3d/Binary_Code.png"
+            },
+            {
+                question: "In the heart of the dorms, where students reside, I serve up warm dishes with Mexican pride. Though my name suggests rest, don't be misled, For I feed hungry minds when it's time to be fed. What am I?",
+                answer: "the lazy scholar",
+                clue: "Head to Victoria Hall. Take a picture in front of the Mexican Food station at the Lazy Scholar.",
+                image: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Lazy_scholar.jpg"
+            },
+            {
+                question: "Convert the emojis to a word",
+                answer: "madagascar",
+                clue: "Head to Goodes Hall. Take a picture in the Cafe Union",
+                image: "https://upload.wikimedia.org/wikipedia/commons/7/70/Madagascar_Location_Map.png"
+            },
+            {
+                question: "I’m a sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they’re in the wrong order. What am I?",
+                answer: "bubble sort",
+                clue: "Head to Stauffer Library. Take a picture in the Fireplace Reading Room on the second floor.",
+                image: "https://upload.wikimedia.org/wikipedia/commons/1/16/Bubble-sort-example-300px.gif"
+            },
+            {
+                question: "I’m the boy who lived, with a lightning scar, In a realm of magic, I’ve journeyed far. With loyal friends, I stand up and fight, Where would you find me, in a world full of light?",
+                answer: "douglas library",
+                clue: "Head to Douglas Library. Take a picture in the Harry Potter room. Make sure to be quiet; there are students studying in there.",
+                image: "https://upload.wikimedia.org/wikipedia/commons/6/63/Douglas_Library_Queen%27s_University.jpg"
+            },
+            {
+                question: "Fill in the leet-code for this code that takes a list of numbers, filters out negative numbers, squares each remaining positive number, and adds them all together.",
+                answer: "douglas library",
+                clue: "Head to the Bioscience complex. Find a tree inside the building and take a picture with it.",
+                image: "https://upload.wikimedia.org/wikipedia/commons/6/63/Douglas_Library_Queen%27s_University.jpg"
+            }
+        ];
 
-            if (JSON.stringify(correctAnswers) === JSON.stringify(userAnswers)) {
-                document.getElementById("leetMessage").innerHTML = "Correct! Now proceed to the next clue.";
-                document.getElementById("leetMessage").style.color = "green";
-                document.getElementById("leetCodeSection").classList.add('hidden');
-                document.getElementById("wordJeopardySection").classList.remove('hidden');
+        function checkAnswer() {
+            const userAnswer = document.getElementById("answerInput").value.toLowerCase();
+            const messageEl = document.getElementById("message");
+
+            if (userAnswer === questions[currentQuestion].answer.toLowerCase()) {
+                if (currentQuestion === questions.length - 1) {
+                    // Handle last question differently
+                    messageEl.classList.add('correct');
+                    messageEl.innerHTML = `Congratulations! You've finished. Screenshot this page and remember the secret code: FALL NIGHT OUT IS SATURDAY, NOVEMBER 9TH`;
+                } else {
+                    document.getElementById("questionSection").classList.add('hidden');
+                    document.getElementById("clueSection").classList.remove('hidden');
+                    document.getElementById("clueMessage").innerText = "Correct! " + questions[currentQuestion].clue;
+                }
             } else {
-                document.getElementById("leetMessage").innerHTML = "Incorrect, try again.";
-                document.getElementById("leetMessage").style.color = "red";
+                messageEl.classList.remove('correct');
+                messageEl.innerHTML = "Incorrect, try again.";
             }
         }
 
-        // Word Jeopardy question check
-        function checkWordJeopardy() {
-            const word1 = document.getElementById("word1").value.toLowerCase();
-            const word2 = document.getElementById("word2").value.toLowerCase();
-            const word3 = document.getElementById("word3").value.toLowerCase();
+        function nextClue() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                document.getElementById("question").innerHTML = "Question " + (currentQuestion + 1) + ": " + questions[currentQuestion].question;
+                document.getElementById("questionImage").src = questions[currentQuestion].image;
+                document.getElementById("answerInput").value = "";
+                document.getElementById("message").innerText = "";
 
-            if (word1 === "python" && word2 === "array" && word3 === "program") {
-                document.getElementById("wordMessage").innerHTML = "Correct! Now proceed to the next clue.";
-                document.getElementById("wordMessage").style.color = "green";
-            } else {
-                document.getElementById("wordMessage").innerHTML = "Incorrect, try again.";
-                document.getElementById("wordMessage").style.color = "red";
+                document.getElementById("questionSection").classList.remove('hidden');
+                document.getElementById("clueSection").classList.add('hidden');
             }
         }
     </script>
