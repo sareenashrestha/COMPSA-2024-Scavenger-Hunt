@@ -206,6 +206,7 @@ def sum_of_squares_of_positives(numbers):
         function checkAnswer() {
             const userAnswer = document.getElementById("answerInput").value.toLowerCase();
             const messageEl = document.getElementById("message");
+            console.log("Current Question: ", currentQuestion);  // Add this for debugging
 
             if (userAnswer === questions[currentQuestion].answer.toLowerCase()) {
                 document.getElementById("questionSection").classList.add('hidden');
@@ -252,7 +253,7 @@ def sum_of_squares_of_positives(numbers):
             const correctAnswers2 = ["0", "numbers", "num", "0", "num", "*", "num", "total"];
             const userAnswers = [input1, input2, input3, input4, input5, input6, input7, input8];
 
-           if (JSON.stringify(correctAnswers) === JSON.stringify(userAnswers) || JSON.stringify(correctAnswers2) === JSON.stringify(userAnswers)) {
+           if (JSON.stringify(correctAnswers1) === JSON.stringify(userAnswers) || JSON.stringify(correctAnswers2) === JSON.stringify(userAnswers)) {
                 document.getElementById("leetMessage").innerHTML = "Correct! Here's your next clue.";
                 document.getElementById("leetMessage").style.color = "green";
                 document.getElementById("leetCodeSection").classList.add('hidden');
