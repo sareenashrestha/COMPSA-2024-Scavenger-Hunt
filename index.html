@@ -249,10 +249,10 @@ def sum_of_squares_of_positives(numbers):
             const input8 = document.getElementById("input8").value.toLowerCase();
 
             const correctAnswers1 = ["0", "numbers", "num", "0", "num", "**", "2", "total"];
-            const correctAnswers2 = ["0", "numbers", "num", "0", "num", "*", "num", "total]"
+            const correctAnswers2 = ["0", "numbers", "num", "0", "num", "*", "num", "total"];
             const userAnswers = [input1, input2, input3, input4, input5, input6, input7, input8];
 
-            if (JSON.stringify(correctAnswers) === JSON.stringify(userAnswers) or JSON.stringify(correctAnswers2) === JSON.stringify(userAnswers)) {
+           if (JSON.stringify(correctAnswers) === JSON.stringify(userAnswers) || JSON.stringify(correctAnswers2) === JSON.stringify(userAnswers)) {
                 document.getElementById("leetMessage").innerHTML = "Correct! Here's your next clue.";
                 document.getElementById("leetMessage").style.color = "green";
                 document.getElementById("leetCodeSection").classList.add('hidden');
