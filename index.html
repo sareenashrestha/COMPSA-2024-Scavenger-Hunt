@@ -136,11 +136,11 @@ def sum_of_squares_of_positives(numbers):
         <div id="wordJeopardySection" class="hidden">
             <h2>Word Jeopardy</h2>
             <p>Fill in the missing letters:</p>
-            <p>1) _ y _ h _ n</p>
+            <p>1) _ _ t _ o n</p>
             <input type="text" id="word1" size="15">
-            <p>2) A _ r _ _</p>
+            <p>2) C _ _ e _ e c _ _ e </p>
             <input type="text" id="word2" size="15">
-            <p>3) _ r _ g _ _ m</p>
+            <p>3) _ r o _ r _ m </p>
             <input type="text" id="word3" size="15">
             <button onclick="checkWordJeopardy()">Submit Answers</button>
             <p class="message" id="wordMessage"></p>
@@ -272,7 +272,7 @@ def sum_of_squares_of_positives(numbers):
             const word2 = document.getElementById("word2").value.toLowerCase();
             const word3 = document.getElementById("word3").value.toLowerCase();
 
-            if (word1 === "python" && word2 === "array" && word3 === "program") {
+            if (word1 === "python" && word2 === "cheesecake" && word3 === "program") {
                 document.getElementById("wordMessage").innerHTML = "Correct! You have completed the scavenger hunt!";
                 document.getElementById("wordMessage").style.color = "green";
                 showFinalPage(); // Show final page after completion
