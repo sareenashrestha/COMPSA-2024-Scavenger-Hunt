@@ -238,6 +238,14 @@ def sum_of_squares_of_positives(numbers):
             }
         }
 
+        function arraysEqual(arr1, arr2) {
+            if (arr1.length != arr2.length) return False;
+            for (let i = 0; i < arr1.length; i++) {
+                if (arr1[i] !== arr2[i]) return false;
+            }
+            return true;
+        }
+
         // LeetCode question check
         function checkLeetCode() {
             const input1 = document.getElementById("input1").value.toLowerCase();
@@ -253,7 +261,7 @@ def sum_of_squares_of_positives(numbers):
             const correctAnswers2 = ["0", "numbers", "num", "0", "num", "*", "num", "total"];
             const userAnswers = [input1, input2, input3, input4, input5, input6, input7, input8];
 
-           if (JSON.stringify(correctAnswers1) === JSON.stringify(userAnswers) || JSON.stringify(correctAnswers2) === JSON.stringify(userAnswers)) {
+           if (arraysEqual(userAnswers, correctAnswers1) || arraysEqual(userAnswers, correctAnswers2)) {
                 document.getElementById("leetMessage").innerHTML = "Correct! Here's your next clue.";
                 document.getElementById("leetMessage").style.color = "green";
                 document.getElementById("leetCodeSection").classList.add('hidden');
