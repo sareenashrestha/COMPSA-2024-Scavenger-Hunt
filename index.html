@@ -66,6 +66,13 @@
         .hidden {
             display: none;
         }
+        pre {
+            white-space: pre-wrap; /* Wraps text */
+            word-wrap: break-word; /* Breaks long words */
+        }
+        input[type="text"] {
+            width: 40px; /* Make input fields smaller */
+        }
     </style>
 </head>
 <body>
@@ -93,12 +100,6 @@
             <button onclick="nextClue()">Next Clue</button>
         </div>
 
-        <!-- Next Clue Section -->
-        <div id="nextClueSection" class="hidden">
-            <p>Now that you've uploaded your picture!</p>
-            <button onclick="nextClue()">Next Clue</button>
-        </div>
-
         <!-- LeetCode Section (second last) -->
         <div id="leetCodeSection" class="hidden">
             <h2>Fill in the code:</h2>
@@ -119,13 +120,24 @@ def sum_of_squares_of_positives(numbers):
             <h2>Word Jeopardy</h2>
             <p>Fill in the missing letters:</p>
             <p>1) _ y _ t _ n</p>
-            <input type="text" id="word1" size="15" placeholder="Python">
+            <input type="text" id="word1" size="15">
             <p>2) A _ r _ _</p>
-            <input type="text" id="word2" size="15" placeholder="Array">
+            <input type="text" id="word2" size="15">
             <p>3) _ r _ g _ a</p>
-            <input type="text" id="word3" size="15" placeholder="Program">
+            <input type="text" id="word3" size="15">
             <button onclick="checkWordJeopardy()">Submit Answers</button>
             <p class="message" id="wordMessage"></p>
+        </div>
+
+        <!-- Final Page Section with Secret Code -->
+        <div id="finalPageSection" class="hidden">
+            <h2>Congratulations! 🎉</h2>
+            <p>You have completed the scavenger hunt! Your secret code is:</p>
+            <p><strong>FALL NIGHT OUT IS NOVEMBER 9TH 2024</strong></p>
+            <p>Submit the code via the following form:</p>
+            <a href="https://forms.gle/your-google-form-link" target="_blank">
+                <button>Submit Code Here</button>
+            </a>
         </div>
     </div>
 
@@ -244,10 +256,17 @@ def sum_of_squares_of_positives(numbers):
             if (word1 === "python" && word2 === "array" && word3 === "program") {
                 document.getElementById("wordMessage").innerHTML = "Correct! You have completed the scavenger hunt!";
                 document.getElementById("wordMessage").style.color = "green";
+                showFinalPage(); // Show final page after completion
             } else {
                 document.getElementById("wordMessage").innerHTML = "Incorrect, try again.";
                 document.getElementById("wordMessage").style.color = "red";
             }
+        }
+
+        // Show Final Page with Secret Code
+        function showFinalPage() {
+            document.getElementById("wordJeopardySection").classList.add('hidden');
+            document.getElementById("finalPageSection").classList.remove('hidden');
         }
     </script>
 </body>
