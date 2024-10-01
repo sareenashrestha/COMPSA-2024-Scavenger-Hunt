@@ -242,21 +242,21 @@ def sum_of_squares_of_positives(numbers):
         function arraysEqual(arr1, arr2) {
             if (arr1.length != arr2.length) return false;
             for (let i = 0; i < arr1.length; i++) {
-                if (arr1[i] !== arr2[i]) return false;
+                if (arr1[i].trim() !== arr2[i].trim()) return false;
             }
             return true;
         }
 
         // LeetCode question check
         function checkLeetCode() {
-            const input1 = document.getElementById("input1").value.toLowerCase();
-            const input2 = document.getElementById("input2").value.toLowerCase();
-            const input3 = document.getElementById("input3").value.toLowerCase();
-            const input4 = document.getElementById("input4").value.toLowerCase();
-            const input5 = document.getElementById("input5").value.toLowerCase();
-            const input6 = document.getElementById("input6").value.toLowerCase();
-            const input7 = document.getElementById("input7").value.toLowerCase();
-            const input8 = document.getElementById("input8").value.toLowerCase();
+            const input1 = document.getElementById("input1").value.trim().toLowerCase();
+            const input2 = document.getElementById("input2").value.trim().toLowerCase();
+            const input3 = document.getElementById("input3").value.trim().toLowerCase();
+            const input4 = document.getElementById("input4").value.trim().toLowerCase();
+            const input5 = document.getElementById("input5").value.trim().toLowerCase();
+            const input6 = document.getElementById("input6").value.trim().toLowerCase();
+            const input7 = document.getElementById("input7").value.trim().toLowerCase();
+            const input8 = document.getElementById("input8").value.trim().toLowerCase();
 
             const correctAnswers1 = ["0", "numbers", "num", "0", "num", "**", "2", "total"];
             const correctAnswers2 = ["0", "numbers", "num", "0", "num", "*", "num", "total"];
