@@ -32,13 +32,9 @@
             color: #b19cd9;
             margin-bottom: 20px;
         }
-        h2 {
-            font-size: 20px;
-            color: #b19cd9;
-            margin-bottom: 20px;
-        }
-        p {
-            color: #b19cd9;
+        h2, p {
+            font-size: 16px;
+            color: white;
         }
         img {
             max-width: 80%;
@@ -47,7 +43,6 @@
             border-radius: 8px;
         }
         input, button {
-            width: 100%;
             padding: 10px;
             margin-bottom: 10px;
             border: none;
@@ -55,16 +50,23 @@
             font-size: 16px;
         }
         input {
-            background-color: #333;
+            width: 50%
+            background-color: #666;
             color: #fff;
-            border: 2px solid #b19cd9; /* Add border to input */
+            border: 2px solid transparent; /* Add border to input */
             text-align: center; /* Center align the input text */
+            transition: border-color 0.3s ease;
+        }
+        input:focus {
+            border-color: #b19cd9;
+            outline: none;
         }
         button {
+            width: 40%
             background-color: #28a745;
             color: white;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
         }
         button:hover {
             background-color: #218838;
@@ -85,9 +87,11 @@
             img {
                 width: 100%;
             }
-            input, button {
-                padding: 8px;
-                font-size: 14px;
+            input {
+                width: 70%
+            }
+            button {
+                width: 60%
             }
         }
     </style>
