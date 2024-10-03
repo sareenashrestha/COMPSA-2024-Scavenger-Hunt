@@ -261,32 +261,35 @@ def sum_of_squares_of_positives(numbers):
         }
 
         function nextClue() {
-            currentQuestion++;
+           currentQuestion++;
 
-            if (currentQuestion < questions.length - 2) {
-                document.getElementById("question").innerHTML = "Question " + (currentQuestion + 1) + ": " + questions[currentQuestion].question;
-                document.getElementById("answerInput").value = "";
-                document.getElementById("message").innerText = "";
-
-                const imageEl = document.getElementById("questionImage");
-                if (questions[currentQuestion].image) {
-                    imageEl.src = questions[currentQuestion].image;
-                    imageEl.style.display = 'block';
-                } else {
-                    imageEl.style.display = 'none';
-                }
-
-                document.getElementById("questionSection").classList.remove('hidden');
-                document.getElementById("clueSection").classList.add('hidden');
-            } else if (currentQuestion === questions.length - 2) {
-                document.getElementById("clueSection").classList.add('hidden');
-                document.getElementById("leetCodeSection").classList.remove('hidden');
+        if (currentQuestion < questions.length) {
+            // Display the next question normally
+            document.getElementById("question").innerHTML = "Question " + (currentQuestion + 1) + ": " + questions[currentQuestion].question;
+            document.getElementById("answerInput").value = "";
+            document.getElementById("message").innerText = "";
+    
+            const imageEl = document.getElementById("questionImage");
+            if (questions[currentQuestion].image) {
+                imageEl.src = questions[currentQuestion].image;
+                imageEl.style.display = 'block';
             } else {
-                document.getElementById("leetCodeSection").classList.add('hidden');
-                document.getElementById("wordJeopardySection").classList.remove('hidden');
+                imageEl.style.display = 'none';
             }
+    
+            // Make sure to show the correct sections
+            document.getElementById("questionSection").classList.remove('hidden');
+            document.getElementById("clueSection").classList.add('hidden');
+            document.getElementById("leetCodeSection").classList.add('hidden');
+            document.getElementById("wordJeopardySection").classList.add('hidden');
+            document.getElementById("finalPageSection").classList.add('hidden');
+    
+        } else if (currentQuestion === questions.length) {
+            // Final: Word Jeopardy
+            document.getElementById("questionSection").classList.add('hidden');
+            document.getElementById("wordJeopardySection").classList.remove('hidden');
         }
-
+    }
         function checkLeetCode() {
             const input1 = document.getElementById("input1").value.trim().toLowerCase();
             const input2 = document.getElementById("input2").value.trim().toLowerCase();
