@@ -50,24 +50,24 @@
             font-size: 16px;
         }
         input {
-            width: 50%
-            background-color: #444;
-            color: white;
-            border: 2px solid transparent; /* Add border to input */
+            width: 50%; /* Fixed: Added missing semicolon */
+            background-color: #444; /* Dark grey background */
+            color: white; /* White text */
+            border: 2px solid transparent; /* No border initially */
             text-align: center; /* Center align the input text */
             transition: border-color 0.3s ease;
         }
         input::placeholder {
-            color: white;
+            color: white; /* White placeholder text */
         }
         input:focus {
-            border-color: #6a0dad;
+            border-color: #6a0dad; /* Dark purple border on focus */
             outline: none;
         }
         button {
-            width: 40%
-            background-color: #28a745;
-            color: white;
+            width: 40%; /* Fixed: Added missing semicolon */
+            background-color: #28a745; /* Green background */
+            color: white; /* White text */
             cursor: pointer;
             font-size: 14px;
         }
@@ -88,10 +88,10 @@
                 width: 100%;
             }
             input {
-                width: 70%
+                width: 70%; /* Adjust size for mobile */
             }
             button {
-                width: 60%
+                width: 60%; /* Adjust size for mobile */
             }
         }
     </style>
