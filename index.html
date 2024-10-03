@@ -261,7 +261,23 @@ def sum_of_squares_of_positives(numbers):
         }
 
         function nextClue() {
-            if (currentQuestion < questions.length - 2) {
+            if (currentQuestion < questions.length - 3) {
+                currentQuestion++;
+                document.getElementById("question").innerHTML = "Question " + (currentQuestion + 1) + ": " + questions[currentQuestion].question;
+                document.getElementById("answerInput").value = "";
+                document.getElementById("message").innerText = "";
+
+                const imageEl = document.getElementById("questionImage");
+                if (questions[currentQuestion].image) {
+                    imageEl.src = questions[currentQuestion].image;
+                    imageEl.style.display = 'block';
+                } else {
+                    imageEl.style.display = 'none';
+                }
+
+                document.getElementById("questionSection").classList.remove('hidden');
+                document.getElementById("clueSection").classList.add('hidden');
+            } else if (currentQuestion === questions.length - 3) {
                 currentQuestion++;
                 document.getElementById("question").innerHTML = "Question " + (currentQuestion + 1) + ": " + questions[currentQuestion].question;
                 document.getElementById("answerInput").value = "";
@@ -338,5 +354,6 @@ def sum_of_squares_of_positives(numbers):
     </script>
 </body>
 </html>
+
 
 
