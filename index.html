@@ -42,7 +42,7 @@
         }
         input, button {
             width: 100%;
-            padding: 8px; /* Reduced padding to make input smaller */
+            padding: 4px; /* Reduced padding to make input smaller */
             margin-bottom: 10px;
             border: none;
             border-radius: 4px;
@@ -219,19 +219,22 @@
         }
 
         function checkMazeAnswer() {
-            const userAnswer = document.getElementById("mazeAnswerInput").value.toLowerCase();
+            const correctAnswer = "sassasasdsdwdddsdsasawawdwwaasawassasdwdsddwawdwdsdsss";
+            const userAnswer = document.getElementById("mazeAnswerInput").value.toLowerCase().trim(); // Convert to lowercase and trim spaces
             const messageEl = document.getElementById("mazeMessage");
 
-            if (userAnswer === questions[currentQuestion].answer.toLowerCase()) {
+            if (userAnswer === correctAnswer) {
                 document.getElementById("mazeSection").classList.add('hidden');
                 document.getElementById("clueSection").classList.remove('hidden');
                 document.getElementById("clueMessage").innerText = "Correct! " + questions[currentQuestion].clue;
                 document.getElementById("googleFormLink").href = questions[currentQuestion].formLink;
+                messageEl.innerHTML = ""; // Clear any previous error message
             } else {
                 messageEl.innerHTML = "Incorrect, try again.";
                 messageEl.style.color = "red";
             }
         }
+
 
         function showFinalPage() {
             document.getElementById("clueSection").classList.add('hidden');
