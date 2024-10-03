@@ -260,11 +260,10 @@ def sum_of_squares_of_positives(numbers):
             }
         }
 
-       function nextClue() {
+        function nextClue() {
             currentQuestion++;
-    
+
             if (currentQuestion < questions.length - 2) {
-                // General case: Show the next regular question
                 document.getElementById("question").innerHTML = "Question " + (currentQuestion + 1) + ": " + questions[currentQuestion].question;
                 document.getElementById("answerInput").value = "";
                 document.getElementById("message").innerText = "";
@@ -280,11 +279,9 @@ def sum_of_squares_of_positives(numbers):
                 document.getElementById("questionSection").classList.remove('hidden');
                 document.getElementById("clueSection").classList.add('hidden');
             } else if (currentQuestion === questions.length - 2) {
-                // Show LeetCode question
                 document.getElementById("clueSection").classList.add('hidden');
                 document.getElementById("leetCodeSection").classList.remove('hidden');
             } else {
-                // Final question - Word Jeopardy
                 document.getElementById("leetCodeSection").classList.add('hidden');
                 document.getElementById("wordJeopardySection").classList.remove('hidden');
             }
@@ -351,6 +348,4 @@ def sum_of_squares_of_positives(numbers):
 </body>
 </html>
 
-
-
-
+      
