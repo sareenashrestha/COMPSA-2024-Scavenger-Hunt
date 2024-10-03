@@ -127,17 +127,6 @@
             <button onclick="nextClue()">Next Clue</button>
         </div>
 
-        <!-- Maze Question Section -->
-        <div id="mazeSection" class="hidden">
-            <h2>#3 Maze</h2>
-            <img id="mazeImage" src="scavenger hunt maze.png" alt="Maze Image">
-            <p>Start from the top. Write your answer using the "wasd" notation, where "w" is up, "s" is down, "a" is left, "d" is right. Your movements stop whenever there is a choice of which direction to go again, at which point you type another letter to specify the direction.</p>
-            <label for="mazeAnswerInput">Answer</label>
-            <input type="text" id="mazeAnswerInput" placeholder="Enter your path">
-            <p class="message" id="mazeMessage"></p>
-            <button onclick="checkMazeAnswer()">Submit</button>
-        </div>
-
         <!-- Final Page Section with Secret Code -->
         <div id="finalPageSection" class="hidden">
             <h2>Congratulations! 🎉</h2>
@@ -247,23 +236,6 @@
             }
         }
 
-        function checkMazeAnswer() {
-            const correctAnswer = "sassasasdsdwdddsdsasawawdwwaasawassasdwdsddwawdwdsdsss";
-            const userAnswer = document.getElementById("mazeAnswerInput").value.toLowerCase().trim(); 
-            const messageEl = document.getElementById("mazeMessage");
-
-            if (userAnswer === correctAnswer) {
-                messageEl.innerHTML = "Correct! Moving to the next step...";
-                messageEl.style.color = "green";
-                document.getElementById("mazeSection").classList.add('hidden');
-                document.getElementById("clueSection").classList.remove('hidden');
-                document.getElementById("clueMessage").innerText = "Correct! " + questions[currentQuestion].clue;
-                document.getElementById("googleFormLink").href = questions[currentQuestion].formLink;
-            } else {
-                messageEl.innerHTML = "Incorrect, please try again";
-                messageEl.style.color = "red";
-            }
-        }
 
         function showFinalPage() {
             document.getElementById("clueSection").classList.add('hidden');
