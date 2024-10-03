@@ -70,12 +70,6 @@
             white-space: pre-wrap; /* Wraps text */
             word-wrap: break-word; /* Breaks long words */
         }
-        /* Reduce size of text inputs for the LeetCode section */
-        .leetcode-input {
-            width: 60px;
-            padding: 5px;
-            margin: 2px;
-        }
     </style>
 </head>
 <body>
@@ -91,6 +85,17 @@
             <p class="message" id="message"></p>
         </div>
 
+        <!-- Wordle-style Question Section -->
+        <div id="wordleSection" class="hidden">
+            <h2>Guess the 5-letter word:</h2>
+            <input type="text" id="wordleInput" maxlength="5" placeholder="Enter your guess" style="text-transform:uppercase;">
+            <button onclick="checkWordle()">Submit Guess</button>
+            <p class="message" id="wordleMessage"></p>
+
+            <!-- Display the result of the guess (like Wordle feedback) -->
+            <div id="wordleResult"></div>
+        </div>
+
         <!-- Clue and Upload Section -->
         <div id="clueSection" class="hidden">
             <h2 id="clueMessage"></h2>
@@ -101,36 +106,6 @@
             </a>
             <p>After you submit the form, click below to proceed to the next riddle.</p>
             <button onclick="nextClue()">Next Clue</button>
-        </div>
-
-        <!-- LeetCode Section (second last) -->
-        <div id="leetCodeSection" class="hidden">
-            <h2>Fill in the LeetCode for this code that takes a list of numbers:</h2>
-            <p>Filters out negative numbers.</p>
-            <p>Squares each remaining positive number.</p>
-            <p>Adds them all together.</p>
-            <pre>
-def sum_of_squares_of_positives(numbers):
-    total = <input type="text" id="input1" class="leetcode-input" placeholder="______">
-    for num in <input type="text" id="input2" class="leetcode-input" placeholder="______">:
-        if <input type="text" id="input3" class="leetcode-input" placeholder="______"> > <input type="text" id="input4" class="leetcode-input" placeholder="______">:
-            total += <input type="text" id="input5" class="leetcode-input" placeholder="______"> <input type="text" id="input6" class="leetcode-input" placeholder="______"> <input type="text" id="input7" class="leetcode-input" placeholder="______">
-    return <input type="text" id="input8" class="leetcode-input" placeholder="______">
-            </pre>
-            <button onclick="checkLeetCode()">Submit Code</button>
-            <p class="message" id="leetMessage"></p>
-        </div>
-
-        <!-- LeetCode Clue Section -->
-        <div id="leetClueSection" class="hidden">
-            <h2>Correct! Here's your next clue:</h2>
-            <p>Go to the Bioscience Building and take a picture with a tree inside of the building.</p>
-            <p>Upload a picture of you and your group at the location. If you took a picture at an incorrect location, a COMPSA member will message you on your private group chat and let you know.</p>
-            <a href="https://docs.google.com/forms/d/1NYvkYsukEadPW0qif9oAbWS43RXF0zjn8WAMSdJNVS4/edit" target="_blank">
-                <button>Go to Upload Form</button>
-            </a>
-             <p>After you submit the form, click below to proceed to the next riddle.</p>
-            <button onclick="nextClueFromLeet()">Next Clue</button>
         </div>
 
         <!-- Word Jeopardy Section (last question) -->
@@ -191,8 +166,8 @@ def sum_of_squares_of_positives(numbers):
                 formLink: "https://forms.gle/7CwgeyLNn5eAfdvcA"
             },
             {
-                question: "I’m a sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they’re in the wrong order. What am I?",
-                answer: "bubble sort",
+                question: "Guess the 5-letter word. (Wordle-style question)",
+                answer: "music",
                 clue: "Head to Stauffer Library. Take a picture in the Fireplace Reading Room on the second floor.",
                 formLink: "https://docs.google.com/forms/d/1mEcmvb0V_VGkMfNuq977OIzADoxPMVmJpMpCj2UfhdY/edit"
             },
@@ -207,7 +182,6 @@ def sum_of_squares_of_positives(numbers):
         function checkAnswer() {
             const userAnswer = document.getElementById("answerInput").value.toLowerCase();
             const messageEl = document.getElementById("message");
-            console.log("Current Question: ", currentQuestion);  // Add this for debugging
 
             if (userAnswer === questions[currentQuestion].answer.toLowerCase()) {
                 document.getElementById("questionSection").classList.add('hidden');
@@ -224,7 +198,7 @@ def sum_of_squares_of_positives(numbers):
             if (currentQuestion < questions.length - 2) {
                 currentQuestion++;
                 document.getElementById("question").innerHTML = "Question " + (currentQuestion + 1) + ": " + questions[currentQuestion].question;
-                document.getElementById("questionImage").src = questions[currentQuestion].image;
+                document.getElementById("questionImage").src = questions[currentQuestion].image || '';
                 document.getElementById("answerInput").value = "";
                 document.getElementById("message").innerText = "";
 
@@ -232,50 +206,52 @@ def sum_of_squares_of_positives(numbers):
                 document.getElementById("clueSection").classList.add('hidden');
             } else if (currentQuestion === questions.length - 2) {
                 document.getElementById("clueSection").classList.add('hidden');
-                document.getElementById("leetCodeSection").classList.remove('hidden'); // Show LeetCode section next
+                document.getElementById("wordleSection").classList.remove('hidden'); // Show Wordle section next
             } else {
-                document.getElementById("leetCodeSection").classList.add('hidden');
+                document.getElementById("wordleSection").classList.add('hidden');
                 document.getElementById("wordJeopardySection").classList.remove('hidden'); // Show Word Jeopardy section
             }
         }
 
-        function arraysEqual(arr1, arr2) {
-            if (arr1.length != arr2.length) return false;
-            for (let i = 0; i < arr1.length; i++) {
-                if (arr1[i].trim() !== arr2[i].trim()) return false;
+        // Wordle-style question check
+        function checkWordle() {
+            const correctWord = "music"; // The word to guess
+            const userGuess = document.getElementById("wordleInput").value.toLowerCase();
+            const resultEl = document.getElementById("wordleResult");
+            const messageEl = document.getElementById("wordleMessage");
+
+            // Ensure the user has entered a 5-letter word
+            if (userGuess.length !== 5) {
+                messageEl.innerText = "Please enter a 5-letter word.";
+                return;
             }
-            return true;
-        }
 
-        // LeetCode question check
-        function checkLeetCode() {
-            const input1 = document.getElementById("input1").value.trim().toLowerCase();
-            const input2 = document.getElementById("input2").value.trim().toLowerCase();
-            const input3 = document.getElementById("input3").value.trim().toLowerCase();
-            const input4 = document.getElementById("input4").value.trim().toLowerCase();
-            const input5 = document.getElementById("input5").value.trim().toLowerCase();
-            const input6 = document.getElementById("input6").value.trim().toLowerCase();
-            const input7 = document.getElementById("input7").value.trim().toLowerCase();
-            const input8 = document.getElementById("input8").value.trim().toLowerCase();
+            let result = '';
+            let correctLetters = 0; // Track how many letters are correct
 
-            const correctAnswers1 = ["0", "numbers", "num", "0", "num", "**", "2", "total"];
-            const correctAnswers2 = ["0", "numbers", "num", "0", "num", "*", "num", "total"];
-            const userAnswers = [input1, input2, input3, input4, input5, input6, input7, input8];
+            // Loop through the user's guess and compare with the correct word
+            for (let i = 0; i < 5; i++) {
+                if (userGuess[i] === correctWord[i]) {
+                    result += `<span style="color:green; font-weight:bold;">${userGuess[i].toUpperCase()}</span> `; // Correct letter in the correct place
+                    correctLetters++;
+                } else if (correctWord.includes(userGuess[i])) {
+                    result += `<span style="color:orange;">${userGuess[i].toUpperCase()}</span> `; // Correct letter in the wrong place
+                } else {
+                    result += `<span style="color:red;">${userGuess[i].toUpperCase()}</span> `; // Letter not in the word
+                }
+            }
 
-           if (arraysEqual(userAnswers, correctAnswers1) || arraysEqual(userAnswers, correctAnswers2)) {
-                document.getElementById("leetMessage").innerHTML = "Correct! Here's your next clue.";
-                document.getElementById("leetMessage").style.color = "green";
-                document.getElementById("leetCodeSection").classList.add('hidden');
-                document.getElementById("leetClueSection").classList.remove('hidden');
+            resultEl.innerHTML = result;
+
+            // Check if the user guessed the word correctly
+            if (correctLetters === 5) {
+                messageEl.innerHTML = "<span style='color:green;'>Congratulations! You've guessed the word!</span>";
             } else {
-                document.getElementById("leetMessage").innerHTML = "Incorrect, try again.";
-                document.getElementById("leetMessage").style.color = "red";
+                messageEl.innerHTML = "Keep trying!";
             }
-        }
 
-        function nextClueFromLeet() {
-            document.getElementById("leetClueSection").classList.add('hidden');
-            document.getElementById("wordJeopardySection").classList.remove('hidden');
+            // Clear the input field for the next guess
+            document.getElementById("wordleInput").value = "";
         }
 
         // Word Jeopardy question check
