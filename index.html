@@ -85,7 +85,7 @@
             <p class="message" id="message"></p>
         </div>
 
-        <!-- Wordle-style Question Section -->
+        <!-- Wordle-style Question Section (last question) -->
         <div id="wordleSection" class="hidden">
             <h2>Guess the 5-letter word:</h2>
             <input type="text" id="wordleInput" maxlength="5" placeholder="Enter your guess" style="text-transform:uppercase;">
@@ -106,20 +106,6 @@
             </a>
             <p>After you submit the form, click below to proceed to the next riddle.</p>
             <button onclick="nextClue()">Next Clue</button>
-        </div>
-
-        <!-- Word Jeopardy Section (last question) -->
-        <div id="wordJeopardySection" class="hidden">
-            <h2>Word Jeopardy</h2>
-            <p>Fill in the missing letters:</p>
-            <p>1) _ _ t _ o n</p>
-            <input type="text" id="word1" size="15">
-            <p>2) C _ _ e _ e c _ _ e </p>
-            <input type="text" id="word2" size="15">
-            <p>3) _ r o _ r _ m </p>
-            <input type="text" id="word3" size="15">
-            <button onclick="checkWordJeopardy()">Submit Answers</button>
-            <p class="message" id="wordMessage"></p>
         </div>
 
         <!-- Final Page Section with Secret Code -->
@@ -144,7 +130,7 @@
                 answer: "cpu",
                 clue: "Go to the ARC. Take a picture at COGRO (Common Ground Coffeehouse).",
                 image: "https://upload.wikimedia.org/wikipedia/commons/6/6f/DDR4_RAM.jpg",
-                formLink: "https://forms.gle/V1ckxxnm12gLvapX6" // Google Form Link for this clue
+                formLink: "https://forms.gle/V1ckxxnm12gLvapX6"
             },
             {
                 question: "Convert this 8-bit binary to ASCII code: 1000011 01001111 01001101 01010000 01010011 01000001 01010010 01001111 01000011 01001011 01010011",
@@ -209,7 +195,7 @@
                 document.getElementById("wordleSection").classList.remove('hidden'); // Show Wordle section next
             } else {
                 document.getElementById("wordleSection").classList.add('hidden');
-                document.getElementById("wordJeopardySection").classList.remove('hidden'); // Show Word Jeopardy section
+                document.getElementById("finalPageSection").classList.remove('hidden'); // Show final section
             }
         }
 
@@ -246,6 +232,10 @@
             // Check if the user guessed the word correctly
             if (correctLetters === 5) {
                 messageEl.innerHTML = "<span style='color:green;'>Congratulations! You've guessed the word!</span>";
+                document.getElementById("wordleSection").classList.add('hidden');
+                document.getElementById("clueSection").classList.remove('hidden');
+                document.getElementById("clueMessage").innerText = "Correct! " + questions[currentQuestion].clue;
+                document.getElementById("googleFormLink").href = questions[currentQuestion].formLink;
             } else {
                 messageEl.innerHTML = "Keep trying!";
             }
@@ -253,28 +243,7 @@
             // Clear the input field for the next guess
             document.getElementById("wordleInput").value = "";
         }
-
-        // Word Jeopardy question check
-        function checkWordJeopardy() {
-            const word1 = document.getElementById("word1").value.toLowerCase();
-            const word2 = document.getElementById("word2").value.toLowerCase();
-            const word3 = document.getElementById("word3").value.toLowerCase();
-
-            if (word1 === "python" && word2 === "cheesecake" && word3 === "program") {
-                document.getElementById("wordMessage").innerHTML = "Correct! You have completed the scavenger hunt!";
-                document.getElementById("wordMessage").style.color = "green";
-                showFinalPage(); // Show final page after completion
-            } else {
-                document.getElementById("wordMessage").innerHTML = "Incorrect, try again.";
-                document.getElementById("wordMessage").style.color = "red";
-            }
-        }
-
-        // Show Final Page with Secret Code
-        function showFinalPage() {
-            document.getElementById("wordJeopardySection").classList.add('hidden');
-            document.getElementById("finalPageSection").classList.remove('hidden');
-        }
     </script>
 </body>
 </html>
+
