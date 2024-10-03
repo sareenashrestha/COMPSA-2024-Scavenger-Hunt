@@ -226,7 +226,7 @@ def sum_of_squares_of_positives(numbers):
                 question: "Complete this maze. Start from the top. Write your answer using the 'wasd' notation, where 'w' is up, 's' is down, 'a' is left, 'd' is right.",
                 answer: "sassasasdsdwdddsdsasawawdwwaasawassasdwdsddwawdwdsdsss",
                 clue: "Head to Stauffer Library. Take a picture in the Fireplace Reading Room on the second floor.",
-                image: "scavenger hunt maze.png",
+                image: "scavengerhuntmaze.png",
                 formLink: "https://docs.google.com/forms/d/1mEcmvb0V_VGkMfNuq977OIzADoxPMVmJpMpCj2UfhdY/edit"
             },
             {
@@ -260,9 +260,11 @@ def sum_of_squares_of_positives(numbers):
             }
         }
 
-        function nextClue() {
-            if (currentQuestion < questions.length - 3) {
-                currentQuestion++;
+       function nextClue() {
+            currentQuestion++;
+    
+            if (currentQuestion < questions.length - 2) {
+                // General case: Show the next regular question
                 document.getElementById("question").innerHTML = "Question " + (currentQuestion + 1) + ": " + questions[currentQuestion].question;
                 document.getElementById("answerInput").value = "";
                 document.getElementById("message").innerText = "";
@@ -276,27 +278,13 @@ def sum_of_squares_of_positives(numbers):
                 }
 
                 document.getElementById("questionSection").classList.remove('hidden');
-                document.getElementById("clueSection").classList.add('hidden');
-            } else if (currentQuestion === questions.length - 3) {
-                currentQuestion++;
-                document.getElementById("question").innerHTML = "Question " + (currentQuestion + 1) + ": " + questions[currentQuestion].question;
-                document.getElementById("answerInput").value = "";
-                document.getElementById("message").innerText = "";
-
-                const imageEl = document.getElementById("questionImage");
-                if (questions[currentQuestion].image) {
-                    imageEl.src = questions[currentQuestion].image;
-                    imageEl.style.display = 'block';
-                } else {
-                    imageEl.style.display = 'none';
-                }
-
-                document.getElementById("questionSection").classList.remove('hidden');
-                document.getElementById("clueSection").classList.add('hidden');
+                document.getElementById("clueSection").classList.add('hidden");
             } else if (currentQuestion === questions.length - 2) {
+                // Show LeetCode question
                 document.getElementById("clueSection").classList.add('hidden');
                 document.getElementById("leetCodeSection").classList.remove('hidden');
             } else {
+                // Final question - Word Jeopardy
                 document.getElementById("leetCodeSection").classList.add('hidden');
                 document.getElementById("wordJeopardySection").classList.remove('hidden');
             }
@@ -351,9 +339,18 @@ def sum_of_squares_of_positives(numbers):
             document.getElementById("wordJeopardySection").classList.add('hidden');
             document.getElementById("finalPageSection").classList.remove('hidden');
         }
+
+        function arraysEqual(arr1, arr2) {
+            if (arr1.length != arr2.length) return false;
+            for (let i = 0; i < arr1.length; i++) {
+                if (arr1[i].trim() !== arr2[i].trim()) return false;
+            }
+            return true;
+        }
     </script>
 </body>
 </html>
+
 
 
 
