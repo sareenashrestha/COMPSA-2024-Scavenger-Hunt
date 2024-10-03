@@ -281,7 +281,7 @@ def sum_of_squares_of_positives(numbers):
                 document.getElementById("clueSection").classList.add('hidden');
             } else if (currentQuestion === questions.length) {
                 // Transition to LeetCode section after all questions
-                document.getElementById("questionSection").classList.add('hidden');
+                document.getElementById("clueSection").classList.add('hidden');
                 document.getElementById("leetCodeSection").classList.remove('hidden');
             } else if (currentQuestion === questions.length + 1) {
                 // Transition to Word Jeopardy after LeetCode
@@ -310,16 +310,19 @@ def sum_of_squares_of_positives(numbers):
             const correctAnswers2 = ["0", "numbers", "num", "0", "num", "*", "num", "total"];
             const userAnswers = [input1, input2, input3, input4, input5, input6, input7, input8];
 
-            if (arraysEqual(userAnswers, correctAnswers1) || arraysEqual(userAnswers, correctAnswers2)) {
+           if (arraysEqual(userAnswers, correctAnswers1) || arraysEqual(userAnswers, correctAnswers2)) {
                 document.getElementById("leetMessage").innerHTML = "Correct! Here's your next clue.";
                 document.getElementById("leetMessage").style.color = "green";
+            
+                // Hide previous sections before showing the next clue
                 document.getElementById("leetCodeSection").classList.add('hidden');
+                document.getElementById("clueSection").classList.add('hidden'); // Hide the clue section here
                 document.getElementById("leetClueSection").classList.remove('hidden');
             } else {
                 document.getElementById("leetMessage").innerHTML = "Incorrect, try again.";
                 document.getElementById("leetMessage").style.color = "red";
             }
-        }
+
 
         function nextClueFromLeet() {
             document.getElementById("leetClueSection").classList.add('hidden');
