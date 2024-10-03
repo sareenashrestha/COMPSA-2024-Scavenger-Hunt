@@ -260,11 +260,11 @@ def sum_of_squares_of_positives(numbers):
             }
         }
 
-        function nextClue() {
+         function nextClue() {
             currentQuestion++;
         
-            if (currentQuestion < questions.length - 4) {
-                // General case: Show the next regular question
+            if (currentQuestion < questions.length) {
+                // Show the next regular question
                 document.getElementById("question").innerHTML = "Question " + (currentQuestion + 1) + ": " + questions[currentQuestion].question;
                 document.getElementById("answerInput").value = "";
                 document.getElementById("message").innerText = "";
@@ -277,29 +277,14 @@ def sum_of_squares_of_positives(numbers):
                     imageEl.style.display = 'none';
                 }
         
-                // Show the next question section and hide others
                 document.getElementById("questionSection").classList.remove('hidden');
                 document.getElementById("clueSection").classList.add('hidden');
-                document.getElementById("leetCodeSection").classList.add('hidden');
-                document.getElementById("wordJeopardySection").classList.add('hidden');
-                document.getElementById("finalPageSection").classList.add('hidden');
-            } else if (currentQuestion === questions.length - 4) {
-                // Show Maze question
-                document.getElementById("questionSection").classList.add('hidden');
-                document.getElementById("clueSection").classList.add('hidden');
-                document.getElementById("leetCodeSection").classList.add('hidden');
-                document.getElementById("mazeSection").classList.remove('hidden'); // Show maze
-            } else if (currentQuestion === questions.length - 3) {
-                // Show Lightning Scar question
-                document.getElementById("mazeSection").classList.add('hidden');
-                document.getElementById("questionSection").classList.remove('hidden');
-                document.getElementById("question").innerHTML = "Question " + (currentQuestion + 1) + ": " + questions[currentQuestion].question;
-            } else if (currentQuestion === questions.length - 2) {
-                // Show LeetCode question
+            } else if (currentQuestion === questions.length) {
+                // Transition to LeetCode section after all questions
                 document.getElementById("questionSection").classList.add('hidden');
                 document.getElementById("leetCodeSection").classList.remove('hidden');
-            } else if (currentQuestion === questions.length - 1) {
-                // Show Word Jeopardy section
+            } else if (currentQuestion === questions.length + 1) {
+                // Transition to Word Jeopardy after LeetCode
                 document.getElementById("leetCodeSection").classList.add('hidden');
                 document.getElementById("wordJeopardySection").classList.remove('hidden');
             } else {
@@ -308,6 +293,7 @@ def sum_of_squares_of_positives(numbers):
                 document.getElementById("finalPageSection").classList.remove('hidden');
             }
         }
+
 
 
         function checkLeetCode() {
