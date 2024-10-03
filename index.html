@@ -16,24 +16,23 @@
             align-items: center;
             height: 100vh;
         }
-    
         .container {
             background-color: #333;
             color: #fff;
-            padding: 30px; /* Increased padding */
+            padding: 30px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             text-align: center;
-            max-width: 600px; /* Increased max width */
+            max-width: 600px;
             width: 100%;
         }
         h1 {
-            font-size: 28px;
+            font-size: 24px; /* Smaller font size for mobile */
             color: #b19cd9;
             margin-bottom: 20px;
         }
         h2 {
-            font-size: 22px; /* Smaller font size for questions */
+            font-size: 18px; /* Smaller font size for questions */
         }
         img {
             max-width: 100%;
@@ -51,7 +50,7 @@
         input {
             background-color: #444;
             color: #fff;
-            font-size: 16px; /* Adjust font size of input */
+            font-size: 16px;
         }
         button {
             background-color: #28a745;
@@ -73,15 +72,31 @@
             display: none;
         }
         pre {
-            white-space: pre-wrap; /* Wraps text */
-            word-wrap: break-word; /* Breaks long words */
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
 
-        /* Reduce size of text inputs for the LeetCode section */
-        .leetcode-input {
-            width: 60px;
-            padding: 5px;
-            margin: 2px;
+        /* Responsive design for mobile devices */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 18px; /* Even smaller font size for mobile */
+            }
+            h2 {
+                font-size: 14px; /* Make question font smaller for mobile */
+            }
+            .container {
+                padding: 15px; /* Reduce padding on mobile */
+            }
+            img {
+                width: 80%; /* Make image smaller on mobile */
+                margin-bottom: 10px; /* Reduce margin for images */
+            }
+            input, button {
+                padding: 6px; /* Reduce padding for smaller input/button */
+            }
+            button {
+                font-size: 14px; /* Reduce font size of buttons for mobile */
+            }
         }
     </style>
 </head>
@@ -110,48 +125,14 @@
             <button onclick="nextClue()">Next Clue</button>
         </div>
 
-        <!-- LeetCode Section (second last) -->
-        <div id="leetCodeSection" class="hidden">
-            <h2>Fill in the LeetCode for this code that takes a list of numbers:</h2>
-            <p>Filters out negative numbers.</p>
-            <p>Squares each remaining positive number.</p>
-            <p>Adds them all together.</p>
-            <pre>
-def sum_of_squares_of_positives(numbers):
-    total = <input type="text" id="input1" class="leetcode-input" placeholder="______">
-    for num in <input type="text" id="input2" class="leetcode-input" placeholder="______">:
-        if <input type="text" id="input3" class="leetcode-input" placeholder="______"> > <input type="text" id="input4" class="leetcode-input" placeholder="______">:
-            total += <input type="text" id="input5" class="leetcode-input" placeholder="______"> <input type="text" id="input6" class="leetcode-input" placeholder="______"> <input type="text" id="input7" class="leetcode-input" placeholder="______">
-    return <input type="text" id="input8" class="leetcode-input" placeholder="______">
-            </pre>
-            <button onclick="checkLeetCode()">Submit Code</button>
-            <p class="message" id="leetMessage"></p>
-        </div>
-
-        <!-- LeetCode Clue Section -->
-        <div id="leetClueSection" class="hidden">
-            <h2>Correct! Here's your next clue:</h2>
-            <p>Go to the Bioscience Building and take a picture with a tree inside of the building.</p>
-            <p>Upload a picture of you and your group at the location. If you took a picture at an incorrect location, a COMPSA member will message you on your private group chat and let you know.</p>
-            <a href="https://docs.google.com/forms/d/1NYvkYsukEadPW0qif9oAbWS43RXF0zjn8WAMSdJNVS4/edit" target="_blank">
-                <button>Go to Upload Form</button>
-            </a>
-             <p>After you submit the form, click below to proceed to the next riddle.</p>
-            <button onclick="nextClueFromLeet()">Next Clue</button>
-        </div>
-
-        <!-- Word Jeopardy Section (last question) -->
-        <div id="wordJeopardySection" class="hidden">
-            <h2>Word Jeopardy</h2>
-            <p>Fill in the missing letters:</p>
-            <p>1) _ _ t _ o n</p>
-            <input type="text" id="word1" size="15">
-            <p>2) C _ _ e _ e c _ _ e </p>
-            <input type="text" id="word2" size="15">
-            <p>3) _ r o _ r _ m </p>
-            <input type="text" id="word3" size="15">
-            <button onclick="checkWordJeopardy()">Submit Answers</button>
-            <p class="message" id="wordMessage"></p>
+        <!-- Maze Question Section -->
+        <div id="mazeSection" class="hidden">
+            <h2>Solve the maze!</h2>
+            <p>Complete the maze using 'wasd' notation (where 'w' is up, 's' is down, 'a' is left, and 'd' is right). Your movements stop at choices, at which point you can select another direction.</p>
+            <img id="mazeImage" src="scavenger hunt maze.png" alt="Maze Image">
+            <input type="text" id="mazeAnswerInput" placeholder="Enter your path">
+            <button onclick="checkMazeAnswer()">Submit Path</button>
+            <p class="message" id="mazeMessage"></p>
         </div>
 
         <!-- Final Page Section with Secret Code -->
@@ -198,24 +179,17 @@ def sum_of_squares_of_positives(numbers):
                 formLink: "https://forms.gle/7CwgeyLNn5eAfdvcA"
             },
             {
-                question: "Complete this maze. Start from the top. Write your answer using the 'wasd' notation, where 'w' is up, 's' is down, 'a' is left, 'd' is right. Your movements stop whenever there is a choice of which direction to go again, at which point you type another letter to specify the direction.",
+                question: "Complete this maze. Start from the top. Write your answer using the 'wasd' notation, where 'w' is up, 's' is down, 'a' is left, 'd' is right.",
                 answer: "sassasasdsdwdddsdsasawawdwwaasawassasdwdsddwawdwdsdsss",
                 clue: "Head to Stauffer Library. Take a picture in the Fireplace Reading Room on the second floor.",
                 image: "scavenger hunt maze.png",
                 formLink: "https://docs.google.com/forms/d/1mEcmvb0V_VGkMfNuq977OIzADoxPMVmJpMpCj2UfhdY/edit"
-            },
-            {
-                question: "I’m the boy who lived, with a lightning scar, In a realm of magic, I’ve journeyed far. With loyal friends, I stand up and fight, Where would you find me, in a world full of light?",
-                answer: "douglas library",
-                clue: "Head to Douglas Library. Take a picture in the Harry Potter room. Make sure to be quiet; there are students studying in there.",
-                formLink: "https://docs.google.com/forms/d/18y_HRD5j_YLwHap2SNr0Wt6bSsxhG1bjgFufF13-bd8/edit"
             }
         ];
 
         function checkAnswer() {
             const userAnswer = document.getElementById("answerInput").value.toLowerCase();
             const messageEl = document.getElementById("message");
-            console.log("Current Question: ", currentQuestion);  // Add this for debugging
 
             if (userAnswer === questions[currentQuestion].answer.toLowerCase()) {
                 document.getElementById("questionSection").classList.add('hidden');
@@ -238,76 +212,31 @@ def sum_of_squares_of_positives(numbers):
 
                 document.getElementById("questionSection").classList.remove('hidden');
                 document.getElementById("clueSection").classList.add('hidden');
-            } else if (currentQuestion === questions.length - 2) {
+            } else {
                 document.getElementById("clueSection").classList.add('hidden');
-                document.getElementById("leetCodeSection").classList.remove('hidden'); // Show LeetCode section next
+                document.getElementById("mazeSection").classList.remove('hidden'); // Show Maze section next
+            }
+        }
+
+        function checkMazeAnswer() {
+            const userAnswer = document.getElementById("mazeAnswerInput").value.toLowerCase();
+            const messageEl = document.getElementById("mazeMessage");
+
+            if (userAnswer === questions[currentQuestion].answer.toLowerCase()) {
+                document.getElementById("mazeSection").classList.add('hidden');
+                document.getElementById("clueSection").classList.remove('hidden');
+                document.getElementById("clueMessage").innerText = "Correct! " + questions[currentQuestion].clue;
+                document.getElementById("googleFormLink").href = questions[currentQuestion].formLink;
             } else {
-                document.getElementById("leetCodeSection").classList.add('hidden');
-                document.getElementById("wordJeopardySection").classList.remove('hidden'); // Show Word Jeopardy section
+                messageEl.innerHTML = "Incorrect, try again.";
+                messageEl.style.color = "red";
             }
         }
 
-        function arraysEqual(arr1, arr2) {
-            if (arr1.length != arr2.length) return false;
-            for (let i = 0; i < arr1.length; i++) {
-                if (arr1[i].trim() !== arr2[i].trim()) return false;
-            }
-            return true;
-        }
-
-        // LeetCode question check
-        function checkLeetCode() {
-            const input1 = document.getElementById("input1").value.trim().toLowerCase();
-            const input2 = document.getElementById("input2").value.trim().toLowerCase();
-            const input3 = document.getElementById("input3").value.trim().toLowerCase();
-            const input4 = document.getElementById("input4").value.trim().toLowerCase();
-            const input5 = document.getElementById("input5").value.trim().toLowerCase();
-            const input6 = document.getElementById("input6").value.trim().toLowerCase();
-            const input7 = document.getElementById("input7").value.trim().toLowerCase();
-            const input8 = document.getElementById("input8").value.trim().toLowerCase();
-
-            const correctAnswers1 = ["0", "numbers", "num", "0", "num", "**", "2", "total"];
-            const correctAnswers2 = ["0", "numbers", "num", "0", "num", "*", "num", "total"];
-            const userAnswers = [input1, input2, input3, input4, input5, input6, input7, input8];
-
-           if (arraysEqual(userAnswers, correctAnswers1) || arraysEqual(userAnswers, correctAnswers2)) {
-                document.getElementById("leetMessage").innerHTML = "Correct! Here's your next clue.";
-                document.getElementById("leetMessage").style.color = "green";
-                document.getElementById("leetCodeSection").classList.add('hidden');
-                document.getElementById("leetClueSection").classList.remove('hidden');
-            } else {
-                document.getElementById("leetMessage").innerHTML = "Incorrect, try again.";
-                document.getElementById("leetMessage").style.color = "red";
-            }
-        }
-
-        function nextClueFromLeet() {
-            document.getElementById("leetClueSection").classList.add('hidden');
-            document.getElementById("wordJeopardySection").classList.remove('hidden');
-        }
-
-        // Word Jeopardy question check
-        function checkWordJeopardy() {
-            const word1 = document.getElementById("word1").value.toLowerCase();
-            const word2 = document.getElementById("word2").value.toLowerCase();
-            const word3 = document.getElementById("word3").value.toLowerCase();
-
-            if (word1 === "python" && word2 === "cheesecake" && word3 === "program") {
-                document.getElementById("wordMessage").innerHTML = "Correct! You have completed the scavenger hunt!";
-                document.getElementById("wordMessage").style.color = "green";
-                showFinalPage(); // Show final page after completion
-            } else {
-                document.getElementById("wordMessage").innerHTML = "Incorrect, try again.";
-                document.getElementById("wordMessage").style.color = "red";
-            }
-        }
-
-        // Show Final Page with Secret Code
         function showFinalPage() {
-            document.getElementById("wordJeopardySection").classList.add('hidden');
+            document.getElementById("clueSection").classList.add('hidden');
             document.getElementById("finalPageSection").classList.remove('hidden');
         }
     </script>
 </body>
 </html>
-
