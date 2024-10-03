@@ -52,10 +52,13 @@
         input {
             width: 50%
             background-color: #444;
-            color: #fff;
+            color: white;
             border: 2px solid transparent; /* Add border to input */
             text-align: center; /* Center align the input text */
             transition: border-color 0.3s ease;
+        }
+        input::placeholder {
+            color: white;
         }
         input:focus {
             border-color: #6a0dad;
@@ -67,9 +70,6 @@
             color: white;
             cursor: pointer;
             font-size: 14px;
-        }
-        button:hover {
-            background-color: #28a745;
         }
         .message {
             color: red;
