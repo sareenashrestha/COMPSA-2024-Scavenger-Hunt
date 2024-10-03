@@ -35,11 +35,11 @@
         h2 {
             font-size: 20px;
             color: white;
-            marigin-bottom: 10px;
+            margin-bottom: 10px;
         }
         p {
-            font-size: 18px
-                color: white;
+            font-size: 18px;
+            color: white;
         }
         img {
             max-width: 80%;
@@ -56,24 +56,24 @@
             font-size: 16px;
         }
         input {
-            width: 50%; /* Fixed: Added missing semicolon */
-            background-color: #444; /* Dark grey background */
-            color: white; /* White text */
-            border: 2px solid transparent; /* No border initially */
-            text-align: center; /* Center align the input text */
+            width: 50%;
+            background-color: #444;
+            color: white;
+            border: 2px solid transparent;
+            text-align: center;
             transition: border-color 0.3s ease;
         }
         input::placeholder {
-            color: white; /* White placeholder text */
+            color: white;
         }
         input:focus {
-            border-color: #6a0dad; /* Dark purple border on focus */
+            border-color: #6a0dad;
             outline: none;
         }
         button {
-            width: 20%; /* Fixed: Added missing semicolon */
-            background-color: #28a745; /* Green background */
-            color: white; /* White text */
+            width: 20%;
+            background-color: #28a745;
+            color: white;
             cursor: pointer;
             font-size: 14px;
         }
@@ -94,11 +94,20 @@
                 width: 100%;
             }
             input {
-                width: 70%; /* Adjust size for mobile */
+                width: 70%;
             }
             button {
-                width: 60%; /* Adjust size for mobile */
+                width: 60%;
             }
+        }
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .leetcode-input {
+            width: 60px;
+            padding: 5px;
+            margin: 2px;
         }
     </style>
 </head>
@@ -127,12 +136,55 @@
             <button onclick="nextClue()">Next Clue</button>
         </div>
 
+        <!-- LeetCode Section -->
+        <div id="leetCodeSection" class="hidden">
+            <h2>Fill in the LeetCode for this code that takes a list of numbers:</h2>
+            <p>Filters out negative numbers.</p>
+            <p>Squares each remaining positive number.</p>
+            <p>Adds them all together.</p>
+            <pre>
+def sum_of_squares_of_positives(numbers):
+    total = <input type="text" id="input1" class="leetcode-input" placeholder="______">
+    for num in <input type="text" id="input2" class="leetcode-input" placeholder="______">:
+        if <input type="text" id="input3" class="leetcode-input" placeholder="______"> > <input type="text" id="input4" class="leetcode-input" placeholder="______">:
+            total += <input type="text" id="input5" class="leetcode-input" placeholder="______"> <input type="text" id="input6" class="leetcode-input" placeholder="______"> <input type="text" id="input7" class="leetcode-input" placeholder="______">
+    return <input type="text" id="input8" class="leetcode-input" placeholder="______">
+            </pre>
+            <button onclick="checkLeetCode()">Submit Code</button>
+            <p class="message" id="leetMessage"></p>
+        </div>
+
+        <!-- LeetCode Clue Section -->
+        <div id="leetClueSection" class="hidden">
+            <h2>Correct! Here's your next clue:</h2>
+            <p>Go to the Bioscience Building and take a picture with a tree inside of the building.</p>
+            <p>Upload a picture of you and your group at the location.</p>
+            <a href="https://docs.google.com/forms/d/1NYvkYsukEadPW0qif9oAbWS43RXF0zjn8WAMSdJNVS4/edit" target="_blank">
+                <button>Go to Upload Form</button>
+            </a>
+            <p>After you submit the form, click below to proceed to the next riddle.</p>
+            <button onclick="nextClueFromLeet()">Next Clue</button>
+        </div>
+
+        <!-- Word Jeopardy Section -->
+        <div id="wordJeopardySection" class="hidden">
+            <h2>Word Jeopardy</h2>
+            <p>Fill in the missing letters:</p>
+            <p>1) _ _ t _ o n</p>
+            <input type="text" id="word1" size="15">
+            <p>2) C _ _ e _ e c _ _ e </p>
+            <input type="text" id="word2" size="15">
+            <p>3) _ r o _ r _ m </p>
+            <input type="text" id="word3" size="15">
+            <button onclick="checkWordJeopardy()">Submit Answers</button>
+            <p class="message" id="wordMessage"></p>
+        </div>
+
         <!-- Final Page Section with Secret Code -->
         <div id="finalPageSection" class="hidden">
             <h2>Congratulations! 🎉</h2>
             <p>You have completed the scavenger hunt! The secret code is:</p>
             <p><strong>FALL NIGHT OUT IS NOVEMBER 9TH 2024</strong></p>
-            <p>Once you have submitted the secret code, return to the CASLAB.</p>
             <p>Submit the code via the following form:</p>
             <a href="https://docs.google.com/forms/d/1ID1d1gMKbeihAzwzaKicY9YxLGll6pSL7xDejI159OI/edit" target="_blank">
                 <button>Submit Code Here</button>
@@ -174,18 +226,18 @@
                 question: "Complete this maze. Start from the top. Write your answer using the 'wasd' notation, where 'w' is up, 's' is down, 'a' is left, 'd' is right.",
                 answer: "sassasasdsdwdddsdsasawawdwwaasawassasdwdsddwawdwdsdsss",
                 clue: "Head to Stauffer Library. Take a picture in the Fireplace Reading Room on the second floor.",
-                image: "scavenger hunt maze.png",
+                image: "scavengerhuntmaze.png",
                 formLink: "https://docs.google.com/forms/d/1mEcmvb0V_VGkMfNuq977OIzADoxPMVmJpMpCj2UfhdY/edit"
             },
             {
                 question: "I’m the boy who lived, with a lightning scar, In a realm of magic, I’ve journeyed far. With loyal friends, I stand up and fight, Where would you find me, in a world full of light?",
                 answer: "douglas library",
-                clue: "Head to Douglas Library. Take a picture in the Harry Potter room. Make sure to be quiet; there are students studying in there.",
+                clue: "Head to Douglas Library. Take a picture in the Harry Potter room.",
                 formLink: "https://docs.google.com/forms/d/18y_HRD5j_YLwHap2SNr0Wt6bSsxhG1bjgFufF13-bd8/edit"
             }
         ];
 
-       function checkAnswer() {
+        function checkAnswer() {
             const userAnswer = document.getElementById("answerInput").value.toLowerCase();
             const messageEl = document.getElementById("message");
 
@@ -195,13 +247,12 @@
                 document.getElementById("clueMessage").innerText = "Correct! " + questions[currentQuestion].clue;
                 document.getElementById("googleFormLink").href = questions[currentQuestion].formLink;
 
-                // Conditionally show or hide the image based on whether it exists
                 const imageEl = document.getElementById("questionImage");
                 if (questions[currentQuestion].image) {
                     imageEl.src = questions[currentQuestion].image;
-                    imageEl.style.display = 'block'; // Show the image if it exists
+                    imageEl.style.display = 'block';
                 } else {
-                    imageEl.style.display = 'none'; // Hide the image if it doesn't exist
+                    imageEl.style.display = 'none';
                 }
             } else {
                 messageEl.classList.remove('correct');
@@ -216,32 +267,76 @@
                 document.getElementById("answerInput").value = "";
                 document.getElementById("message").innerText = "";
 
-                // Conditionally show or hide the image based on whether it exists
                 const imageEl = document.getElementById("questionImage");
                 if (questions[currentQuestion].image) {
                     imageEl.src = questions[currentQuestion].image;
-                    imageEl.style.display = 'block'; // Show the image if it exists
+                    imageEl.style.display = 'block';
                 } else {
-                    imageEl.style.display = 'none'; // Hide the image if it doesn't exist
-                 }
+                    imageEl.style.display = 'none';
+                }
 
                 document.getElementById("questionSection").classList.remove('hidden');
                 document.getElementById("clueSection").classList.add('hidden');
             } else if (currentQuestion === questions.length - 2) {
                 document.getElementById("clueSection").classList.add('hidden');
-                document.getElementById("mazeSection").classList.remove('hidden');
+                document.getElementById("leetCodeSection").classList.remove('hidden');
             } else {
-                document.getElementById("mazeSection").classList.add('hidden');
-                document.getElementById("finalPageSection").classList.remove('hidden');
+                document.getElementById("leetCodeSection").classList.add('hidden');
+                document.getElementById("wordJeopardySection").classList.remove('hidden');
             }
         }
 
+        function checkLeetCode() {
+            const input1 = document.getElementById("input1").value.trim().toLowerCase();
+            const input2 = document.getElementById("input2").value.trim().toLowerCase();
+            const input3 = document.getElementById("input3").value.trim().toLowerCase();
+            const input4 = document.getElementById("input4").value.trim().toLowerCase();
+            const input5 = document.getElementById("input5").value.trim().toLowerCase();
+            const input6 = document.getElementById("input6").value.trim().toLowerCase();
+            const input7 = document.getElementById("input7").value.trim().toLowerCase();
+            const input8 = document.getElementById("input8").value.trim().toLowerCase();
+
+            const correctAnswers1 = ["0", "numbers", "num", "0", "num", "**", "2", "total"];
+            const correctAnswers2 = ["0", "numbers", "num", "0", "num", "*", "num", "total"];
+            const userAnswers = [input1, input2, input3, input4, input5, input6, input7, input8];
+
+            if (arraysEqual(userAnswers, correctAnswers1) || arraysEqual(userAnswers, correctAnswers2)) {
+                document.getElementById("leetMessage").innerHTML = "Correct! Here's your next clue.";
+                document.getElementById("leetMessage").style.color = "green";
+                document.getElementById("leetCodeSection").classList.add('hidden');
+                document.getElementById("leetClueSection").classList.remove('hidden');
+            } else {
+                document.getElementById("leetMessage").innerHTML = "Incorrect, try again.";
+                document.getElementById("leetMessage").style.color = "red";
+            }
+        }
+
+        function nextClueFromLeet() {
+            document.getElementById("leetClueSection").classList.add('hidden');
+            document.getElementById("wordJeopardySection").classList.remove('hidden');
+        }
+
+        function checkWordJeopardy() {
+            const word1 = document.getElementById("word1").value.toLowerCase();
+            const word2 = document.getElementById("word2").value.toLowerCase();
+            const word3 = document.getElementById("word3").value.toLowerCase();
+
+            if (word1 === "python" && word2 === "cheesecake" && word3 === "program") {
+                document.getElementById("wordMessage").innerHTML = "Correct! You have completed the scavenger hunt!";
+                document.getElementById("wordMessage").style.color = "green";
+                showFinalPage();
+            } else {
+                document.getElementById("wordMessage").innerHTML = "Incorrect, try again.";
+                document.getElementById("wordMessage").style.color = "red";
+            }
+        }
 
         function showFinalPage() {
-            document.getElementById("clueSection").classList.add('hidden');
+            document.getElementById("wordJeopardySection").classList.add('hidden');
             document.getElementById("finalPageSection").classList.remove('hidden');
         }
     </script>
 </body>
 </html>
+
 
