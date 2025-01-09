@@ -154,6 +154,32 @@ def sum_of_squares_of_positives(numbers):
             <p class="message" id="leetMessage"></p>
         </div>
 
+        <!-- LeetCode Clue Section -->
+        <div id="leetClueSection" class="hidden">
+            <h2>Correct! Here's your next clue:</h2>
+            <p>Go to the Bioscience Building and take a picture with a tree inside of the building.</p>
+            <p>Upload a picture of you and your group at the location.</p>
+            <a href="https://docs.google.com/forms/d/1NYvkYsukEadPW0qif9oAbWS43RXF0zjn8WAMSdJNVS4/edit" target="_blank">
+                <button>Go to Upload Form</button>
+            </a>
+            <p>After you submit the form, click below to proceed to the next riddle.</p>
+            <button onclick="nextClueFromLeet()">Next Clue</button>
+        </div>
+
+        <!-- Word Jeopardy Section -->
+        <div id="wordJeopardySection" class="hidden">
+            <h2>Word Jeopardy</h2>
+            <p>Fill in the missing letters and write out the complete words:</p>
+            <p>1) _ _ t _ o n</p>
+            <input type="text" id="word1" size="15">
+            <p>2) C _ _ e _ e c _ _ e </p>
+            <input type="text" id="word2" size="15">
+            <p>3) _ r o _ r _ m </p>
+            <input type="text" id="word3" size="15">
+            <button onclick="checkWordJeopardy()">Submit Answers</button>
+            <p class="message" id="wordMessage"></p>
+        </div>
+
         <!-- Final Page Section with Secret Code -->
         <div id="finalPageSection" class="hidden">
             <h2>Congratulations! 🎉</h2>
@@ -180,13 +206,14 @@ def sum_of_squares_of_positives(numbers):
             }
         ];
 
-        // Load saved progress from localStorage
+        // Load progress on page load
         document.addEventListener("DOMContentLoaded", function () {
             const savedQuestionIndex = localStorage.getItem("currentQuestion");
             if (savedQuestionIndex !== null) {
                 currentQuestion = parseInt(savedQuestionIndex, 10);
                 loadQuestion(currentQuestion);
             } else {
+                currentQuestion = 0; // Default to the first question
                 loadQuestion(currentQuestion);
             }
         });
@@ -196,27 +223,49 @@ def sum_of_squares_of_positives(numbers):
             const messageEl = document.getElementById("message");
 
             if (userAnswer === questions[currentQuestion].answer.toLowerCase()) {
+                // Save progress
                 localStorage.setItem("currentQuestion", currentQuestion + 1);
 
-                document.getElementById("questionSection").classList.add("hidden");
-                document.getElementById("clueSection").classList.remove("hidden");
+                document.getElementById("questionSection").classList.add('hidden');
+                document.getElementById("clueSection").classList.remove('hidden');
                 document.getElementById("clueMessage").innerText = "Correct! " + questions[currentQuestion].clue;
                 document.getElementById("googleFormLink").href = questions[currentQuestion].formLink;
+
+                const imageEl = document.getElementById("questionImage");
+                if (questions[currentQuestion].image) {
+                    imageEl.src = questions[currentQuestion].image;
+                    imageEl.style.display = 'block';
+                } else {
+                    imageEl.style.display = 'none';
+                }
             } else {
+                messageEl.classList.remove('correct');
                 messageEl.innerHTML = "Incorrect, try again.";
-                messageEl.style.color = "red";
             }
         }
 
-        function nextClue() {
+         function nextClue() {
             currentQuestion++;
             localStorage.setItem("currentQuestion", currentQuestion);
 
             if (currentQuestion < questions.length) {
-                loadQuestion(currentQuestion);
+                document.getElementById("question").innerHTML = "Question " + (currentQuestion + 1) + ": " + questions[currentQuestion].question;
+                document.getElementById("answerInput").value = "";
+                document.getElementById("message").innerText = "";
+
+                const imageEl = document.getElementById("questionImage");
+                if (questions[currentQuestion].image) {
+                    imageEl.src = questions[currentQuestion].image;
+                    imageEl.style.display = 'block';
+                } else {
+                    imageEl.style.display = 'none';
+                }
+
+                document.getElementById("questionSection").classList.remove('hidden');
+                document.getElementById("clueSection").classList.add('hidden');
             } else {
-                document.getElementById("clueSection").classList.add("hidden");
-                document.getElementById("finalPageSection").classList.remove("hidden");
+                document.getElementById("clueSection").classList.add('hidden');
+                document.getElementById("finalPageSection").classList.remove('hidden');
             }
         }
 
@@ -225,17 +274,11 @@ def sum_of_squares_of_positives(numbers):
                 document.getElementById("question").innerHTML = "Question " + (index + 1) + ": " + questions[index].question;
                 document.getElementById("answerInput").value = "";
                 document.getElementById("message").innerText = "";
-
-                const imageEl = document.getElementById("questionImage");
-                if (questions[index].image) {
-                    imageEl.src = questions[index].image;
-                    imageEl.style.display = "block";
-                } else {
-                    imageEl.style.display = "none";
-                }
-
-                document.getElementById("questionSection").classList.remove("hidden");
-                document.getElementById("clueSection").classList.add("hidden");
+                document.getElementById("questionSection").classList.remove('hidden');
+                document.getElementById("clueSection").classList.add('hidden');
+            } else {
+                document.getElementById("questionSection").classList.add('hidden');
+                document.getElementById("finalPageSection").classList.remove('hidden');
             }
         }
     </script>
