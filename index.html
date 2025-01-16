@@ -203,29 +203,46 @@ def sum_of_squares_of_positives(numbers):
                 clue: "Go to the ARC. Take a picture at COGRO (Common Ground Coffeehouse).",
                 image: "https://upload.wikimedia.org/wikipedia/commons/6/6f/DDR4_RAM.jpg",
                 formLink: "https://forms.gle/V1ckxxnm12gLvapX6"
+            },
+            {
+                question: "Convert this 8-bit binary to ASCII code: 1000011 01001111 01001101 01010000 01010011 01000001 01010010 01001111 01000011 01001011 01010011",
+                answer: "compsarocks",
+                clue: "Head to Goodes Hall. Take a picture in Cafe Union",
+                formLink: "https://forms.gle/bGev8A7RY8UMpDKz9"
+            },
+            {
+                question: "In the heart of the dorms, where students reside, I serve up warm dishes with Mexican pride. Though my name suggests rest, don't be misled, For I feed hungry minds when it's time to be fed. What am I?",
+                answer: "the lazy scholar",
+                clue: "Head to Victoria Hall. Take a picture in front of the Mexican Food station at the Lazy Scholar.",
+                formLink: "https://forms.gle/PFvweTpu18eEWCcJ8"
+            },
+            {
+                question: "Convert the emojis to a word",
+                answer: "madagascar",
+                clue: "Head to Botterell. Take a picture in front of the 'Botterell Hall' sign outside",
+                image: "EmojiRiddles28-scaled-2.jpg",
+                formLink: "https://forms.gle/7CwgeyLNn5eAfdvcA"
+            },
+            {
+                question: "Complete this maze. Start from the top. Write your answer using the 'wasd' notation, where 'w' is up, 's' is down, 'a' is left, 'd' is right. Your movements stop whenever there is a choice of which direction to go again, at which point you type another letter to specify the direction.",
+                answer: "sassasasdsdwdddsdsasawawdwwaasawasssasdwdsddwawdwdsdss",
+                clue: "Head to Stauffer Library. Take a picture in the Fireplace Reading Room on the second floor.",
+                image: "scavengerhuntmaze.png",
+                formLink: "https://docs.google.com/forms/d/1mEcmvb0V_VGkMfNuq977OIzADoxPMVmJpMpCj2UfhdY/edit"
+            },
+            {
+                question: "I’m the boy who lived, with a lightning scar, In a realm of magic, I’ve journeyed far. With loyal friends, I stand up and fight, Where would you find me, in a world full of light?",
+                answer: "douglas library",
+                clue: "Head to Douglas Library. Take a picture in the Harry Potter room. Remember to be quiet, there are students studying in there!",
+                formLink: "https://docs.google.com/forms/d/18y_HRD5j_YLwHap2SNr0Wt6bSsxhG1bjgFufF13-bd8/edit"
             }
         ];
-
-        // Load progress on page load
-        document.addEventListener("DOMContentLoaded", function () {
-            const savedQuestionIndex = localStorage.getItem("currentQuestion");
-            if (savedQuestionIndex !== null) {
-                currentQuestion = parseInt(savedQuestionIndex, 10);
-                loadQuestion(currentQuestion);
-            } else {
-                currentQuestion = 0; // Default to the first question
-                loadQuestion(currentQuestion);
-            }
-        });
 
         function checkAnswer() {
             const userAnswer = document.getElementById("answerInput").value.toLowerCase();
             const messageEl = document.getElementById("message");
 
             if (userAnswer === questions[currentQuestion].answer.toLowerCase()) {
-                // Save progress
-                localStorage.setItem("currentQuestion", currentQuestion + 1);
-
                 document.getElementById("questionSection").classList.add('hidden');
                 document.getElementById("clueSection").classList.remove('hidden');
                 document.getElementById("clueMessage").innerText = "Correct! " + questions[currentQuestion].clue;
@@ -246,13 +263,13 @@ def sum_of_squares_of_positives(numbers):
 
          function nextClue() {
             currentQuestion++;
-            localStorage.setItem("currentQuestion", currentQuestion);
-
+        
             if (currentQuestion < questions.length) {
+                // Show the next regular question
                 document.getElementById("question").innerHTML = "Question " + (currentQuestion + 1) + ": " + questions[currentQuestion].question;
                 document.getElementById("answerInput").value = "";
                 document.getElementById("message").innerText = "";
-
+        
                 const imageEl = document.getElementById("questionImage");
                 if (questions[currentQuestion].image) {
                     imageEl.src = questions[currentQuestion].image;
@@ -260,29 +277,90 @@ def sum_of_squares_of_positives(numbers):
                 } else {
                     imageEl.style.display = 'none';
                 }
-
+        
                 document.getElementById("questionSection").classList.remove('hidden');
                 document.getElementById("clueSection").classList.add('hidden');
-            } else {
+            } else if (currentQuestion === questions.length) {
+                // Transition to LeetCode section after all questions
                 document.getElementById("clueSection").classList.add('hidden');
+                document.getElementById("leetCodeSection").classList.remove('hidden');
+            } else if (currentQuestion === questions.length + 1) {
+                // Transition to Word Jeopardy after LeetCode
+                document.getElementById("leetCodeSection").classList.add('hidden');
+                document.getElementById("wordJeopardySection").classList.remove('hidden');
+            } else {
+                // Final step - Show the final page
+                document.getElementById("wordJeopardySection").classList.add('hidden');
                 document.getElementById("finalPageSection").classList.remove('hidden');
             }
         }
 
-        function loadQuestion(index) {
-            if (index < questions.length) {
-                document.getElementById("question").innerHTML = "Question " + (index + 1) + ": " + questions[index].question;
-                document.getElementById("answerInput").value = "";
-                document.getElementById("message").innerText = "";
-                document.getElementById("questionSection").classList.remove('hidden');
-                document.getElementById("clueSection").classList.add('hidden');
+
+
+        function checkLeetCode() {
+            const input1 = document.getElementById("input1").value.trim().toLowerCase();
+            const input2 = document.getElementById("input2").value.trim().toLowerCase();
+            const input3 = document.getElementById("input3").value.trim().toLowerCase();
+            const input4 = document.getElementById("input4").value.trim().toLowerCase();
+            const input5 = document.getElementById("input5").value.trim().toLowerCase();
+            const input6 = document.getElementById("input6").value.trim().toLowerCase();
+            const input7 = document.getElementById("input7").value.trim().toLowerCase();
+            const input8 = document.getElementById("input8").value.trim().toLowerCase();
+
+            const correctAnswers1 = ["0", "numbers", "num", "0", "num", "**", "2", "total"];
+            const correctAnswers2 = ["0", "numbers", "num", "0", "num", "*", "num", "total"];
+            const userAnswers = [input1, input2, input3, input4, input5, input6, input7, input8];
+
+           if (arraysEqual(userAnswers, correctAnswers1) || arraysEqual(userAnswers, correctAnswers2)) {
+                document.getElementById("leetMessage").innerHTML = "Correct! Here's your next clue.";
+                document.getElementById("leetMessage").style.color = "green";
+            
+                // Hide previous sections before showing the next clue
+                document.getElementById("leetCodeSection").classList.add('hidden');
+                document.getElementById("clueSection").classList.add('hidden'); // Hide the clue section here
+                document.getElementById("leetClueSection").classList.remove('hidden');
             } else {
-                document.getElementById("questionSection").classList.add('hidden');
-                document.getElementById("finalPageSection").classList.remove('hidden');
+                document.getElementById("leetMessage").innerHTML = "Incorrect, try again.";
+                document.getElementById("leetMessage").style.color = "red";
             }
+        }
+
+
+        function nextClueFromLeet() {
+            document.getElementById("leetClueSection").classList.add('hidden');
+            document.getElementById("wordJeopardySection").classList.remove('hidden');
+        }
+
+        function checkWordJeopardy() {
+            const word1 = document.getElementById("word1").value.toLowerCase();
+            const word2 = document.getElementById("word2").value.toLowerCase();
+            const word3 = document.getElementById("word3").value.toLowerCase();
+
+            if (word1 === "python" && word2 === "cheesecake" && word3 === "program") {
+                document.getElementById("wordMessage").innerHTML = "Correct! You have completed the scavenger hunt!";
+                document.getElementById("wordMessage").style.color = "green";
+                showFinalPage();
+            } else {
+                document.getElementById("wordMessage").innerHTML = "Incorrect, try again.";
+                document.getElementById("wordMessage").style.color = "red";
+            }
+        }
+
+        function showFinalPage() {
+            document.getElementById("wordJeopardySection").classList.add('hidden');
+            document.getElementById("finalPageSection").classList.remove('hidden');
+        }
+
+        function arraysEqual(arr1, arr2) {
+            if (arr1.length != arr2.length) return false;
+            for (let i = 0; i < arr1.length; i++) {
+                if (arr1[i].trim() !== arr2[i].trim()) return false;
+            }
+            return true;
         }
     </script>
 </body>
 </html>
+
 
       
